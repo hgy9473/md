@@ -12,6 +12,13 @@ move tech/健壮代码.md coding-skill/健壮代码.md
 move coding-skill tech
 ```
 
+---
+## mkdir
+
+### 在指定文件夹新建文件夹
+```
+mkdir tech\cesium
+```
 
 
 
