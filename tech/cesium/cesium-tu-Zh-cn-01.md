@@ -76,4 +76,7 @@ entity.label = {
 
 
 
+- 原文 https://cesiumjs.org/tutorials/Cesium-Workshop/#loading-and-styling-entities
+
+
 
