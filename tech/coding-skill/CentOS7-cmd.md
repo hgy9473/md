@@ -28,3 +28,12 @@ $ cd /etc/sysconfig/network-scripts
 ![ CentOS 网络设置](./images/CentOS-nat.png)
 
 5. 在终端输入命令 ` service network restart ` 重启网络连接。
+
+
+## 解压文件
+> 参考资料：http://www.cnblogs.com/chjw8016/p/5953168.html
+
+```c
+// 解压 .tar.gz 文件
+tar -xzvf file.tar.gz 
+```
