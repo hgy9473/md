@@ -52,6 +52,11 @@ $ rm npp_7.5.1_Installer.exe
 ```c
 // 解压 .tar.gz 文件
 tar -xzvf file.tar.gz 
-```// 解压 .zip 文件
+// 解压 .zip 文件
 unzip file.zip
 ```
+
+## yum
+> 参考资料：http://www.runoob.com/linux/linux-yum.html
+
+
