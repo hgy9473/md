@@ -7,7 +7,6 @@ $ su hgy
 
 ```
 
-
 ## 在 VMware 中的 NAT 网络配置
 > 参考资料：http://www.linuxidc.com/Linux/2016-08/133998.htm
 
@@ -30,8 +29,10 @@ $ cd /etc/sysconfig/network-scripts
 5. 在终端输入命令 ` service network restart ` 重启网络连接。
 
 
-## 解压文件
-> 参考资料：http://www.cnblogs.com/chjw8016/p/5953168.html
+## 检查网络是否可用
+```
+$ ping www.baidu.com
+```
 
 ```c
 // 解压 .tar.gz 文件
