@@ -1,8 +1,11 @@
 # CentOS 命令行使用笔记
 ## 切换用户
-```
+> su 命令让你在不登出当前用户的情况下登录为另外一个用户。
+```c
+// 切换到 root 用户，不退出当前用户
 $ su root
 
+// 切换回去
 $ su hgy
 
 ```
@@ -17,7 +20,7 @@ $ su hgy
 ![ VMware NAT 网络设置](./images/VMnet8-nat.png)
 
 3. 在 CentOS 终端中进入 `/etc/sysconfig/network-scripts`
-```
+```c
 $ cd /etc/sysconfig/network-scripts
 ```
 
@@ -30,18 +33,23 @@ $ cd /etc/sysconfig/network-scripts
 
 
 ## 检查网络是否可用
-```
+```c
 $ ping www.baidu.com
 ```
 
 ## 下载文件
-```
+```c
 $ wget http://sw.bos.baidu.com/sw-search-sp/software/3756358c42c34/npp_7.5.1_Installer.exe
 ```
 
 ## 删除文件
-```
+```c
 $ rm npp_7.5.1_Installer.exe
+```
+
+## 清空屏幕
+```c
+$ clear
 ```
 
 
