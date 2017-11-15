@@ -24,6 +24,7 @@ $ cd /etc/sysconfig/network-scripts
 
 4. 在终端输入 `ls` 查找 `ifcfg-e* ` 文件并记住文件名。打开文件，修改使 `BOOTPROTO=dhcp` 、`ONBOOT=yes`。
 > 在 CentOS 中使用 vi 修改文件的笔记见 [CentOS-vi.md](./CentOS-vi.md)
+
 ![ CentOS 网络设置](./images/CentOS-nat.png)
 
 5. 在终端输入命令 ` service network restart ` 重启网络连接。
