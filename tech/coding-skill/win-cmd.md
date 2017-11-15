@@ -20,5 +20,12 @@ move coding-skill tech
 mkdir tech\cesium
 ```
 
+---
+## rd
+
+### 删除文件夹
+```
+rd coding-skill
+```
 
 
