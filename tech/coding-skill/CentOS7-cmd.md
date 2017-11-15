@@ -52,6 +52,21 @@ $ rm npp_7.5.1_Installer.exe
 $ clear
 ```
 
+## 查看操作系统版本
+```
+cat /etc/redhat-release
+```
+
+## 新建文件夹
+```
+$ mkdir newfolder
+```
+
+## 移动文件夹
+```c
+// 移动 test 到根目录
+mv test /
+```
 
 
 ## 解压文件
