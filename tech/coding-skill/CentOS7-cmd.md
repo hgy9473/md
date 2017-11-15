@@ -39,6 +39,10 @@ $ ping www.baidu.com
 $ wget http://sw.bos.baidu.com/sw-search-sp/software/3756358c42c34/npp_7.5.1_Installer.exe
 ```
 
+## 删除文件
+```
+$ rm npp_7.5.1_Installer.exe
+```
 ```c
 // 解压 .tar.gz 文件
 tar -xzvf file.tar.gz 
