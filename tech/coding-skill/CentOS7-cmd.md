@@ -43,7 +43,15 @@ $ wget http://sw.bos.baidu.com/sw-search-sp/software/3756358c42c34/npp_7.5.1_Ins
 ```
 $ rm npp_7.5.1_Installer.exe
 ```
+
+
+
+## 解压文件
+> 参考资料：tar 解压 http://www.cnblogs.com/chjw8016/p/5953168.html
+> 参考资料：zip 解压 https://www.cnblogs.com/chinareny2k/archive/2010/01/05/1639468.html
 ```c
 // 解压 .tar.gz 文件
 tar -xzvf file.tar.gz 
+```// 解压 .zip 文件
+unzip file.zip
 ```
