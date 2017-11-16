@@ -79,6 +79,16 @@ tar -xzvf file.tar.gz
 unzip file.zip
 ```
 
+
+## NAT 网络连接模式下 VMware 物理主机访问 CentOS 虚拟机上的网站
+1. 关闭物理主机防火墙。
+2. 关闭虚拟机防火墙。
+3. 获取虚拟机 ip。
+4. 在 WMware 中打开 `编辑 -> 虚拟网络编辑器`。打开 【NAT 设置窗口】。单击【添加】按钮。
+![主机访问虚拟机网络设置](./images/VMnet8-webshare.png)
+5. 输入主机端口、类型（选 TCP）、虚拟机 IP 地址（第 3 步获取到的）、虚拟机端口。
+6. 测试。用物理主机浏览器打开 http://localhost:刚才设置的主机端口。
+
 ## yum
 > 参考资料：http://www.runoob.com/linux/linux-yum.html
 
