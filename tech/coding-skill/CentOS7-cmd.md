@@ -47,37 +47,58 @@ $ wget http://sw.bos.baidu.com/sw-search-sp/software/3756358c42c34/npp_7.5.1_Ins
 $ rm npp_7.5.1_Installer.exe
 ```
 
+## 删除文件夹
+```c
+$ rm -rf demosite
+// r 删除所有子目录
+// f 删除过程不提示
+```
+
 ## 清空屏幕
 ```c
 $ clear
 ```
 
 ## 查看操作系统版本
-```
+```c
 cat /etc/redhat-release
 ```
 
 ## 新建文件夹
-```
+```c
 $ mkdir newfolder
 ```
 
+## 新建文件
+```
+touch file.format
+```
 ## 移动文件夹
 ```c
 // 移动 test 到根目录
-mv test /
+$ mv test /
 ```
 
 ## 防火墙相关操作
 ```c
 // 查看防火墙状态
-firewall-cmd --state
+$ firewall-cmd --state
 
 // 关闭防火墙
-systemctl stop firewalld.service
+$ systemctl stop firewalld.service
 
 // 开启防火墙
-systemctl start firewalld.servive
+$ systemctl start firewalld.servive
+```
+
+## 切换目录
+```c
+cd test
+// 切换到根目录
+cd /
+// 切换到用户目录
+cd ~
+
 ```
 
 
@@ -86,9 +107,9 @@ systemctl start firewalld.servive
 > 参考资料：zip 解压 https://www.cnblogs.com/chinareny2k/archive/2010/01/05/1639468.html
 ```c
 // 解压 .tar.gz 文件
-tar -xzvf file.tar.gz 
+$ tar -xzvf file.tar.gz 
 // 解压 .zip 文件
-unzip file.zip
+$ unzip file.zip
 ```
 
 
