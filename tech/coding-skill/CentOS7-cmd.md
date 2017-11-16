@@ -68,6 +68,18 @@ $ mkdir newfolder
 mv test /
 ```
 
+## 防火墙相关操作
+```c
+// 查看防火墙状态
+firewall-cmd --state
+
+// 关闭防火墙
+systemctl stop firewalld.service
+
+// 开启防火墙
+systemctl start firewalld.servive
+```
+
 
 ## 解压文件
 > 参考资料：tar 解压 http://www.cnblogs.com/chjw8016/p/5953168.html
