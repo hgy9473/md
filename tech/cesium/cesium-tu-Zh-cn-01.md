@@ -133,10 +133,31 @@ drone.position.setInterpolationOptions({
 ```
 ![平滑飞行路径](./images/cesium08.jpg)
 
-## 三维切片
+## 三维切片(3D Tiles)
+我们团队有时候把 Cesium 称为现实世界数据的三维游戏引擎。不过，处理现实世界的数据比处理一般的游戏视频资源要困难的得多，因为现实世界的数据分辨率极高，可视化精度要求高。幸运的是，Cesium 与开源社区合作开发了 [3D Tiles](http://cesiumjs.org/2015/08/10/Introducing-3D-Tiles/)，这是一个用于流式传输大量异构三维地理空间数据集的开放式规范。
+
+使用类似 Cesium 的地形和图像流技术， 3D Tiles 使得我们可以查看巨大的模型，包括建筑数据集、CAD (或者 BIM )模型、点云、摄影测量模型。
+
+[三维切片调试工具](https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/index.html?src=3D%20Tiles%20Inspector.html&label=3D%20Tiles)
+
+以下是一些不同格式的 3D Tiles 示例:
+- [摄影测量模型](https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/index.html?src=3D%20Tiles%20Photogrammetry.html&label=3D%20Tiles)
+- [BIM](https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/index.html?src=3D%20Tiles%20BIM.html&label=3D%20Tiles)
+- [点云模型](https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/index.html?src=3D%20Tiles%20Point%20Cloud.html&label=3D%20Tiles)
+- [所有格式](https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/index.html?src=3D%20Tiles%20Formats.html&label=3D%20Tiles)
+
+在我们的程序中，我们使用 [Cesium3DTileset](http://cesiumjs.org/Cesium/Build/Documentation/Cesium3DTileset.html) 添加完整的纽约建筑的三维模型来增加真实感。
+```javascript
+// 添加建筑模型
+var city = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
+    url: 'https://beta.cesium.com/api/assets/1461?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkYWJmM2MzNS02OWM5LTQ3OWItYjEyYS0xZmNlODM5ZDNkMTYiLCJpZCI6NDQsImFzc2V0cyI6WzE0NjFdLCJpYXQiOjE0OTkyNjQ3NDN9.vuR75SqPDKcggvUrG_vpx0Av02jdiAxnnB1fNf-9f7s',
+    maximumScreenSpaceError: 16 
+}));
+```
+在这里，我们添加 `tileset` 到 `scene.primitives` 而不是 `scene.entities`，因为 3D Tiles 不是 Entity API。`maximumScreenSpaceError` 指定 Cesium 在渲染一个具体场景显示多少细节，数字越小，视觉效果越好。高度精细的视觉效果必然会带来性能成本，所以改变设置时要小心。
+
+
 
 
 - 原文 https://cesiumjs.org/tutorials/Cesium-Workshop/#loading-and-styling-entities
-
-
 
