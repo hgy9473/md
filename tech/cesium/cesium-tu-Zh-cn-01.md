@@ -115,7 +115,25 @@ dronePromise.then(function(dataSource) {
     };
 });
 ```
+现在我们加入的模型很棒，但是和原来的点不同，无人机是有方向的，如果移动的时候无人机没有转动会很奇怪。幸好，Cesium 提供了一个 [VelocityOrientationProperty 属性](http://cesiumjs.org/Cesium/Build/Documentation/VelocityOrientationProperty.html),它可以根据实体的前后采样位置自动计算方向。
+```javascript
+// 基于采样位置计算方向
+drone.orientation = new Cesium.VelocityOrientationProperty(drone.position);
+```
+为了提升无人机飞行的外观，还有一件事可以做。无人机的飞行路线是线段，看起来不自然，这是因为 Cesium 默认使用线型插值来构建路径。不过还好，插值选项可以修改。
+[插值示例](https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/index.html?src=Interpolation.html&label=All)
 
+为了得到更平滑的飞行路线，我们可以修改插值插值选项：
+// 平滑路径插值
+```javascript
+drone.position.setInterpolationOptions({
+    interpolationDegree : 3,
+    interpolationAlgorithm : Cesium.HermitePolynomialApproximation
+});
+```
+![平滑飞行路径](./images/cesium08.jpg)
+
+## 三维切片
 
 
 - 原文 https://cesiumjs.org/tutorials/Cesium-Workshop/#loading-and-styling-entities
