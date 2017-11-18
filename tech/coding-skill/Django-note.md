@@ -301,3 +301,344 @@ STATICFILES_DIRS = (
 python manage.py runserver 127.0.0.1:8001
 ```
 ![Django 访问静态文件效果](./images/django03.png)
+
+## 接受用户请求的数据
+1. 在 templates 目录编写一个登录页面
+```html
+<!-- file login.html -->
+<!DOCTYPE>
+<html>
+  <head>
+    <meta chartset="utf-8">
+    <title>登陆</title>
+  </head>
+
+  <body>
+    <h1>请输入用户名和密码</h1>
+    <form action="/login/" method="post">
+      <input type="text" name="username" placeholder="用户名">
+      <input type="password" name="password" placeholder="密码">
+      <input type="submit" value="提交" >
+
+    </form>
+
+   </body>
+
+</html>
+```
+2. 修改 cmdb/views.py，设置请求处理
+```python
+# file views.py
+...
+...
+# 新增的函数
+def login(request):
+    if request.method == "POST":
+        username = request.POST.get("username",None)
+        password = request.POST.get("password",None)
+        print(username,password)
+        if username:
+            return HttpResponse("<h1>Hello , "+username+" , you logined in</h1>")
+        else:
+            return HttpResponse("receivied invalified username")
+    else:
+        return render(request,"login.html")
+...
+...
+
+```
+3. 修改 website2/urls.py 设置路由
+```python
+# file urls.py
+from django.conf.urls import url
+from django.contrib import admin
+from cmdb import views
+
+urlpatterns = [
+    url(r'^index/',views.index),
+    url(r'^$',views.home),
+    url(r'^login/',views.login),#新增的路由处理
+]
+
+```
+4. 编辑 website2/settings.py 关闭 csrf 限制
+```python
+# file settings.py
+...
+...
+MIDDLEWARE_CLASSES = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+#    'django.middleware.csrf.CsrfViewMiddleware', #注释掉这一行以关闭 scrf 限制
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+...
+...
+```
+5. 运行，查看效果
+![Django 测试登录界面](./images/django04.png)
+![Django 测试登录完成](./images/django05.png)
+
+
+## 用动态页面响应请求--使用模板
+1. 修改 cmdb/views.py 使其传递数据给模板
+```python
+# file views.py
+...
+...
+user_list = [
+    {"user":"JK","pwd":"123"},
+]
+
+def login(request):
+    if request.method == "POST":
+        username = request.POST.get("username",None)
+        password = request.POST.get("password",None)
+        print(username,password)
+        if username:
+            user_list.append({"user":username,"pwd":password})
+            return render(request,"userlist.html",{"data":user_list})
+        else:
+            return HttpResponse("receivied invalified username")
+    else:
+        return render(request,"login.html")
+...
+...
+
+```
+2. 在 templates 目录下面写一个模板文件
+```html
+<!-- file userlist.html -->
+<!DOCHTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>队友</title>
+</head>
+
+<body>
+<h1>以下是你的队友（包括你）</h1>
+<table border="1">
+  <thead>
+    <th>用户名</th>
+    <th>密码</th>
+  </thead>
+
+  <tbody>
+     {% for line in data %}
+        <tr>
+           <td>{{ line.user }}</td>
+           <td>{{ line.pwd }} </td>
+        </tr>
+     {% endfor %}
+  </tbody>
+</table>
+</body>
+</html>
+
+```
+3. 运行程序，查看效果
+![Django 使用模板](./images/django06.png)
+
+## 使用数据库
+1. 在 settings.py 注册 App
+```python
+# file settings.py
+...
+...
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'cmdb', # 添加 cmdb
+]
+
+...
+...
+```
+
+2. 在 settings.py 配置数据
+```python
+# file settings.py
+...
+...
+# 这里使用默认配置
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+...
+...
+
+3. 编辑 cmdb/models.py 配置数据库表
+```pythton
+# file models.py
+from __future__ import unicode_literals
+
+from django.db import models
+
+class UserInfo(models.Model):
+    user = models.CharField(max_length=32)
+    pwd = models.CharField(max_length=32)
+```
+```c
+/*查看此时的文件目录结构
+[hgy@centosh website2]$ tree
+.
+├── cmdb
+│   ├── admin.py
+│   ├── admin.pyc
+│   ├── apps.py
+│   ├── __init__.py
+│   ├── __init__.pyc
+│   ├── migrations
+│   │   ├── __init__.py
+│   │   └── __init__.pyc
+│   ├── models.py
+│   ├── models.pyc
+│   ├── tests.py
+│   ├── views.py
+│   └── views.pyc
+├── db.sqlite3
+├── manage.py
+├── static
+│   ├── css
+│   │   └── article1.css
+│   ├── images
+│   └── js
+├── templates
+│   ├── index.html
+│   ├── login.html
+│   └── userlist.html
+└── website2
+    ├── __init__.py
+    ├── __init__.pyc
+    ├── settings.py
+    ├── settings.pyc
+    ├── urls.py
+    ├── urls.pyc
+    ├── wsgi.py
+    └── wsgi.pyc
+
+*/
+```
+
+4. 创建表
+```c
+[hgy@centosh website2]$ python manage.py makemigrations
+/* 输出
+Migrations for 'cmdb':
+  0001_initial.py:
+    - Create model UserInfo
+*/
+[hgy@centosh website2]$ python manage.py migrate
+
+/* 输出
+Operations to perform:
+  Apply all migrations: admin, contenttypes, cmdb, auth, sessions
+Running migrations:
+  Rendering model states... DONE
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying cmdb.0001_initial... OK
+  Applying sessions.0001_initial... OK
+
+*/
+
+/* 查看此时的文件目录结构 在 migrations 目录下多了两个文件
+[hgy@centosh website2]$ tree
+.
+├── cmdb
+│   ├── admin.py
+│   ├── admin.pyc
+│   ├── apps.py
+│   ├── __init__.py
+│   ├── __init__.pyc
+│   ├── migrations
+│   │   ├── 0001_initial.py
+│   │   ├── 0001_initial.pyc
+│   │   ├── __init__.py
+│   │   └── __init__.pyc
+│   ├── models.py
+│   ├── models.pyc
+│   ├── tests.py
+│   ├── views.py
+│   └── views.pyc
+├── db.sqlite3
+├── manage.py
+├── static
+│   ├── css
+│   │   └── article1.css
+│   ├── images
+│   └── js
+├── templates
+│   ├── index.html
+│   ├── login.html
+│   └── userlist.html
+└── website2
+    ├── __init__.py
+    ├── __init__.pyc
+    ├── settings.py
+    ├── settings.pyc
+    ├── urls.py
+    ├── urls.pyc
+    ├── wsgi.py
+    └── wsgi.pyc
+
+*/
+```
+
+5. 修改 cmdb/views.py ，使其在收到请求之后将数据写入数据库
+```python
+# file views.py
+...
+...
+from cmdb import models
+
+def login(request):
+    if request.method == "POST":
+        username = request.POST.get("username",None)
+        password = request.POST.get("password",None)
+        print(username,password)
+        if username:
+            models.UserInfo.objects.create(user=username,pwd=password)
+            user_list = models.UserInfo.objects.all()
+            return render(request,"userlist.html",{"data":user_list})
+        else:
+            return HttpResponse("receivied invalified username")       
+    else:
+        return render(request,"login.html")
+
+...
+...
+
+```
+
+6. 运行程序，测试效果
+![Django 数据库测试效果](./images/django07.png)
+
+
+
+
+
+
+
+
