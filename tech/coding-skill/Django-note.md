@@ -124,7 +124,6 @@ python manage.py runserver 0.0.0.0:8001
 
 
 ## 响应一个 HTML 文件
-> 参考：https://www.cnblogs.com/feixuelove1009/p/5823135.html
 
 > 之前都是返回的是字符串。
 1. templates 下写一个 HTML 文件
@@ -635,6 +634,62 @@ def login(request):
 6. 运行程序，测试效果
 ![Django 数据库测试效果](./images/django07.png)
 
+## Django 配置 MySQL 数据库
+> 之前使用的是默认的 sqlite
+1. 安装 MySQL
+具体步骤可参见[CentOS-mysql-note.md](./CentOS-mysql-note.md)
+
+2. 修改 settings.py 中的数据库配置
+```python
+# file settings.py
+...
+...
+DATABASES = {
+    'default': {
+      # 'ENGINE': 'django.db.backends.sqlite3',
+      # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+      'ENGINE':'django.db.backends.mysql',
+      'NAME':'test', #数据库名称
+      'USER':'root',
+      'PASSWORD':'Hgy12345&%',
+      'HOST':'localhost',
+      'PORT':'3306',
+    }
+}
+...
+...
+
+```
+
+3. 创建数据库
+```c
+// 登录
+mysql -u root -p
+// 创建数据库
+mysql> create database test;
+```
+
+4. 创建表
+```c
+python manage.py makemigrations
+
+python manage.py migrate
+```
+
+5. 测试程序，查看效果
+![Django MySQL配置](./images/django08.png)
+
+```c
+mysql use test;
+mysql select * from cmdb_userinfo;
++----+------+--------+
+| id | user | pwd    |
++----+------+--------+
+|  1 | abf  | afbg   |
+|  2 | jkl; | asdfgh |
++----+------+--------+
+
+```
 
 
 
