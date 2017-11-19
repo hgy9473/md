@@ -2,10 +2,13 @@
 
 ## 安装
 ```c
+// 下载安装包
 wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
 
+// 给 yum 指定本地安装包
 yum localinstall mysql57-community-release-el7-8.noarch.rpm
 
+// 安装 本地安装 + 在线安装（安装依赖包）
 yum install mysql-community-server
 
 ```
@@ -19,9 +22,10 @@ systemctl start mysqld
 grep 'temporary password' /var/log/mysqld.log
 
 // 登录
-mysql -uroot -p
+mysql -u root -p
 
-// 修改密码
+// 修改密码 
+// MySQL 默认要求密码包括大小写字母、数字、特殊字符、不少于8位
 set password for 'root'@'localhost'=password('Hgy12345&%');
 ```
 
