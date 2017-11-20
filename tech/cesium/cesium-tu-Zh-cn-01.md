@@ -156,6 +156,76 @@ var city = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
 ```
 在这里，我们添加 `tileset` 到 `scene.primitives` 而不是 `scene.entities`，因为 3D Tiles 不是 Entity API。`maximumScreenSpaceError` 指定 Cesium 在渲染一个具体场景显示多少细节，数字越小，视觉效果越好。高度精细的视觉效果必然会带来性能成本，所以改变设置时要小心。
 
+你可能注意到了建筑在地面上的位置不正确。这是使用三维切片时常见的问题，很容易修复。我们可以通过修改 [modelMatrix](http://cesiumjs.org/Cesium/Build/Documentation/Cesium3DTileset.html?classFilter=3dtil#modelMatrix) 属性来调整模型的位置。
+
+我们可以通过转换模型的 boundingSphere 为 [Cartographic](http://cesiumjs.org/Cesium/Build/Documentation/Cartographic.html?classFilter=cartographic)来获取当前模型的偏移，然后添加所需的偏移量并重新设置 modelMatrix 属性。
+```javascript
+var heightOffset = -32;
+city.readyPromise.then(function(tileset) {
+    // 调整模型位置
+    var boundingSphere = tileset.boundingSphere;
+    var cartographic = Cesium.Cartographic.fromCartesian(boundingSphere.center);
+    var surface = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, 0.0);
+    var offset = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, heightOffset);
+    var translation = Cesium.Cartesian3.subtract(offset, surface, new Cesium.Cartesian3());
+    tileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation);
+})
+
+```
+
+三维切片允许我们设置模型部件的样式。
+```javascript
+var defaultStyle = new Cesium.Cesium3DTileStyle({
+    color : "color('white')",
+    show : true
+});
+city.style = defaultStyle;
+```
+![添加三维切片的效果](./images/cesium09.jpg)
+
+给所有模型设置为同样的颜色只算是用到了皮毛。我们可以根据模型的属性为模型设置不同的样式。以下是根据建筑高度设置颜色的示例：
+```javascript
+var heightStyle = new Cesium.Cesium3DTileStyle({
+    color : {
+        conditions : [
+            ["${height} >= 300", "rgba(45, 0, 75, 0.5)"],
+            ["${height} >= 200", "rgb(102, 71, 151)"],
+            ["${height} >= 100", "rgb(170, 162, 204)"],
+            ["${height} >= 50", "rgb(224, 226, 238)"],
+            ["${height} >= 25", "rgb(252, 230, 200)"],
+            ["${height} >= 10", "rgb(248, 176, 87)"],
+            ["${height} >= 5", "rgb(198, 106, 11)"],
+            ["true", "rgb(127, 59, 8)"]
+        ]
+    }
+});
+
+```
+
+![根据高度为建筑设置不同颜色](./images/cesium10.jpg)
+
+
+更多的三维切片使用和设置样式的应用请查看 [the 3D sandcastle demos](https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/index.html?src=Hello%20World.html&label=3D%20Tiles)
+
+三维切片示例：
+- [格式](https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/index.html?src=3D%20Tiles%20Formats.html&label=3D%20Tiles)
+- [摄影测量模型](https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/index.html?src=3D%20Tiles%20Photogrammetry.html&label=3D%20Tiles)
+- [设置样式](https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/index.html?src=3D%20Tiles%20Feature%20Styling.html&label=3D%20Tiles)
+
+如果你对三维切片的生成过程好奇或者有一些数据要转换，可以看看 [read more here](https://groups.google.com/d/msg/cesium-dev/xLkYIuku9hA/t_AxUBepAgAJ)。
+
+
+## 交互
+
+
+
+
+
+
+
+
+
+
 
 
 
