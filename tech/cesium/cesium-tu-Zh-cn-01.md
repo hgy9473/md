@@ -287,9 +287,82 @@ handler.setInputAction(
 
 
 ## 相机模式
+对于无人飞行，我们在这里可以设置两种简单的模式。
+- 自由模式：默认的相机控件
+- 无人机模式：相机跟随飞行中的无人机并和无人机保持一段距离
 
+自由模式不需要再写代码，因为他是默认模式。对于无人机模式，我们可以使用查看器内置的实体跟踪功能，将相机定位在无人机上并设置一点偏移。要跟踪实体，我们只需设置 [viewer.trackedEntity](http://cesiumjs.org/Cesium/Build/Documentation/Viewer.html?classFilter=viewer#trackedEntity) 。
 
+要切换回自由模式，我们只需要设置 `viewer.trackedEntity` 为 `undefined` ，然后使用 `camera.flyTo()` 返回到我们的主视图。
+```javascript
+// 创建一个跟随无人机的相机
+function setViewMode() {
+    if (droneModeElement.checked) {
+        viewer.trackedEntity = drone;
+    } else {
+        viewer.trackedEntity = undefined;
+        viewer.scene.camera.flyTo(homeCameraView);
+    }
+}
+```
+我们还需要将这个函数和 HTML 元素的 `change` 事件关联起来
+```javascript
+var freeModeElement = document.getElementById('freeMode');
+var droneModeElement = document.getElementById('droneMode');
 
+// 创建一个跟随无人机的相机
+function setViewMode() {
+    if (droneModeElement.checked) {
+        viewer.trackedEntity = drone;
+    } else {
+        viewer.trackedEntity = undefined;
+        viewer.scene.camera.flyTo(homeCameraView);
+    }
+}
+
+freeModeElement.addEventListener('change', setCameraMode);
+droneModeElement.addEventListener('change', setCameraMode);
+
+```
+最后，可以设置当双击实体的时候开始跟踪，并更新界面样式。
+```javascript
+viewer.trackedEntityChanged.addEventListener(function() {
+    if (viewer.trackedEntity === drone) {
+        freeModeElement.checked = false;
+        droneModeElement.checked = true;
+    }
+});
+```
+![相机模式效果](./images/cesium12.jpg)
+
+## 其他
+剩下的代码只是添加了一点可视化选项。类似于之前的交互，我们添加了切换阴影和邻接多边形的功能。
+```javascript
+var shadowsElement = document.getElementById('shadows');
+var neighborhoodsElement =  document.getElementById('neighborhoods');
+
+shadowsElement.addEventListener('change', function (e) {
+    viewer.shadows = e.target.checked;
+});
+
+neighborhoodsElement.addEventListener('change', function (e) {
+    neighborhoods.show = e.target.checked;
+    tileStyle.value = 'transparent';
+    city.style = transparentStyle;
+});
+
+```
+因为三维切片可能不会瞬间加载完，所以我们可以添加一个加载提示并在加载完成之后移除这个提示。
+```javascript
+// 模型加载完成时移除提示
+var loadingIndicator = document.getElementById('loadingIndicator');
+loadingIndicator.style.display = 'block';
+city.readyPromise.then(function () {
+    loadingIndicator.style.display = 'none';
+});
+```
+
+恭喜！我们应用完成了。你现在已经完成了一个完整 Cesium 应用的开发。
 
 
 
