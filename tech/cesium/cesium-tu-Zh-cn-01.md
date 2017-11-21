@@ -216,6 +216,85 @@ var heightStyle = new Cesium.Cesium3DTileStyle({
 
 
 ## 交互
+最后，我们给场景添加一些鼠标交互。为了提升地理藏宝标记的视觉效果，我们可以设置当鼠标滑过标记的时候高亮它。
+
+为了实现这个，我们需要使用 picking ,它是 Cesium 的一个功能，能根据鼠标在 查看器中的位置返回三维场景中的数据。
+
+以下是几种不同的类型的 picking 。
+- [Scene.pick](http://cesiumjs.org/Cesium/Build/Documentation/Scene.html#pick) 根据给定的窗口位置返回一个包含元件的对象。
+- [Scene.drillPick](http://cesiumjs.org/Cesium/Build/Documentation/Scene.html#drillPick) 根据给定的窗口位置，返回包含所有元件的对象列表。
+- [Globe.pick](http://cesiumjs.org/Cesium/Build/Documentation/Globe.html?classFilter=globe#pick) 返回给定射线和地形的交点。
+
+以下是一些应用 picking 的例子
+- [Picking Demo](https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/index.html?src=Picking.html&label=Showcases)
+- [3D Tiles Feature Picking Demo](https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/index.html?src=3D%20Tiles%20Feature%20Picking.html&label=3D%20Tiles)
+
+为了实现鼠标滑过高亮效果，我们首先需要创建鼠标行为处理器。因此我们要使用 [ScreenSpaceEventHandler](http://cesiumjs.org/Cesium/Build/Documentation/ScreenSpaceEventHandler.html) ，它是一组处理器，当接收到用户输入时调用指定的函数。 [ScreenSpaceEventHandler.setInputAction()](http://cesiumjs.org/Cesium/Build/Documentation/ScreenSpaceEventHandler.html#setInputAction) 监听用户的行为类型（[ScreenSpaceEventType](http://cesiumjs.org/Cesium/Build/Documentation/ScreenSpaceEventType.html)） 并调用指定函数（用户行为将作为参数）。
+
+```javascript
+var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+handler.setInputAction(
+    function(movement) {},   
+    Cesium.ScreenSpaceEventType.MOUSE_MOVE
+);
+```
+接下来，我们看看高亮的实现。处理器将传递鼠标事件作为参数，从这个参数能获取到鼠标单击窗口的位置。我们将位置用到 `pick()` 中，如果 `pick()` 返回了一个 `billboard` 对象，说明鼠标滑过了标记。然后，使用之前学到的关于实体样式设置的知识，我们可以为标记设置高亮样式。
+```javascript
+handler.setInputAction(
+    function(movement) {
+        var pickedPrimitive = viewer.scene.pick(movement.endPosition);
+        var pickedEntity = (Cesium.defined(pickedPrimitive)) ? pickedPrimitive.id : undefined;
+    // 高亮实体
+        if (Cesium.defined(pickedEntity) && Cesium.defined(pickedEntity.billboard)) {
+            pickedEntity.billboard.scale = 2.0;
+            pickedEntity.billboard.color = Cesium.Color.ORANGERED;
+        }
+    }, 
+Cesium.ScreenSpaceEventType.MOUSE_MOVE
+
+);
+
+```
+运行程序我们发现当鼠标移开之后标记还是高亮的样式。为了解决这个问题，我们可以跟踪最近高亮的标记并恢复样式。
+
+以下是完整的代码：
+```javascript
+var previousPickedEntity = undefined;
+handler.setInputAction(
+    function(movement) {
+        var pickedPrimitive = viewer.scene.pick(movement.endPosition);
+        var pickedEntity = (Cesium.defined(pickedPrimitive)) ? pickedPrimitive.id : undefined;
+        
+        // 先取消之前高亮的实体
+        if (Cesium.defined(previousPickedEntity)) {
+            previousPickedEntity.billboard.scale = 1.0;
+            previousPickedEntity.billboard.color = Cesium.Color.WHITE;
+        }
+    
+        // 高亮当前实体
+        if (Cesium.defined(pickedEntity) && Cesium.defined(pickedEntity.billboard)) {
+            pickedEntity.billboard.scale = 2.0;
+            pickedEntity.billboard.color = Cesium.Color.ORANGERED;
+            previousPickedEntity = pickedEntity;
+        }
+    }, 
+    Cesium.ScreenSpaceEventType.MOUSE_MOVE
+);
+
+```
+至此，我们完成了鼠标滑过时高亮标记的功能。
+![鼠标滑过高亮效果](./images/cesium11.jpg)
+
+
+## 相机模式
+
+
+
+
+
+
+
+
 
 
 
