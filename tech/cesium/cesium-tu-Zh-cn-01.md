@@ -1,5 +1,35 @@
+#  一个简单的 Cesium 应用的开发（翻译）
 
+[TOC]
 
+## 简介
+欢迎加入 Cesium 家族！为了使你能够尽快学会使用 Cesium 开发网络地图，这个教程将带领你体验一个完整的 Cesium 应用的开发过程。
+
+我们将创建一个简单的应用来可视化纽约市的示例藏宝点。我们将加载多种二三维数据并设置样式，并创建相机和显示选项以方便用户和程序交互。我们将加载一个三维无人机模型来侦察藏宝点。
+
+看完这个教程之后，你将对 Cesium 有一个大致的了解并学会配置 Cesium 的查看器（viewer）、加载数据集、创建几何图形并设置样式、使用三维切片、控制相机、给程序添加鼠标交互功能。
+
+## 安装
+只需要几步我们就可以开始开发了
+1. 访问 [Hello World](http://cesiumjs.org/Cesium/Apps/HelloWorld.html) 看看你的系统是否支持 Cesium。看不到地球？看看[Troubleshooting](http://cesiumjs.org/troubleshooting.html) 。
+2. 安装 [Node.js](https://nodejs.org/en/)。
+3. 获取 [workshop code](https://github.com/AnalyticalGraphicsInc/cesium-workshop) ，解压。
+4. 打开命令行窗口，进入 `cesium-workshop` 目录。
+5. 运行 `npm install` 。
+6. 运行 `npm start` 。
+
+运行 `npm start` 之后，将会输出“Cesium development server running locally. Connect to http://localhost:8080/” 。请不要关闭命令行！这个程序需要一直运行。
+
+在浏览器中打开 `localhost:8080` ，你应该可以看到程序运行的效果。
+![程序最终效果](./images/cesium01.jpg)
+
+## 关于程序目录
+请看看程序目录！这个程序目录已经尽可能设计得很简单，忽略了很多现在 JS 框架。
+- Source : 应用程序的代码和数据。
+- ThirdParty : 外部库，在这个程序里面只有 Cesium。
+- LICENSE.md : 这个程序的使用条款。
+- index.html : 这个程序主要的网页。
+- server.js : 这个程序的服务器。
 
 
 
@@ -22,6 +52,7 @@ neighborhoodsPromise.then(function(dataSource) {
     }
 });
 ```
+
 
 我们可以使用邻域作为实体名称重命名实体。原始的 GeoJson 文件有一个 neighborhood 属性。Cesium 把 GeoJson 属性存在 `entity.properties` 中,所以我们可以像下面这样设置名称：
 ```javascript
