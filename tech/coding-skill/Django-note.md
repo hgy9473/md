@@ -1,6 +1,8 @@
 # Django 笔记
 >>> - - -  -  - **测试环境操作系统：CentOS 7**
 
+[TOC]
+
 ## 简介
 > Django 是一个开源的 Web 应用框架，由 Python 写成，初次发布于 2005 年 7 月。Django 采用了 MVC 软件设计模式。
 
@@ -90,8 +92,8 @@ python manage.py startapp cmdb
 ```c
 vi website2/urls.py
 ```
+编辑文件 `urls.py`
 ```python
-# file urls.py
 from django.conf.urls import url
 from django.contrib import admin
 # 引入cmdb/views.py
@@ -108,8 +110,8 @@ urlpatterns = [
 ```c
 vi cmdb/views.py
 ```
+编辑文件 `views.py`
 ```python
-# file views.py
 from django.shortcuts import HttpResponse
 
 def index(request):
@@ -182,8 +184,8 @@ vi templates/index.html
 ```c
 vi cmdb/views.py
 ```
+编辑文件 `views.py`
 ```python
-# file views.py
 #from django.shortcuts import HttpResponse
 
 from django.shortcuts import render
@@ -197,8 +199,8 @@ def index(request):
 ```c
 vi websites/settings/py
 ```
+编辑文件 `settings.py`
 ``` python
-# file settings.py
 ...
 ...
 TEMPLATES = [
@@ -283,7 +285,6 @@ body{
 
 3. 在 website2/settings.py 配置静态文件目录
 ```python
-# file settings.py
 ...
 ...
 STATIC_URL = '/static/'
@@ -327,7 +328,6 @@ python manage.py runserver 127.0.0.1:8001
 ```
 2. 修改 cmdb/views.py，设置请求处理
 ```python
-# file views.py
 ...
 ...
 # 新增的函数
@@ -362,7 +362,6 @@ urlpatterns = [
 ```
 4. 编辑 website2/settings.py 关闭 csrf 限制
 ```python
-# file settings.py
 ...
 ...
 MIDDLEWARE_CLASSES = [
@@ -386,7 +385,6 @@ MIDDLEWARE_CLASSES = [
 ## 用动态页面响应请求--使用模板
 1. 修改 cmdb/views.py 使其传递数据给模板
 ```python
-# file views.py
 ...
 ...
 user_list = [
@@ -444,9 +442,8 @@ def login(request):
 ![Django 使用模板](./images/django06.png)
 
 ## 使用数据库
-1. 在 settings.py 注册 App
+1. 在 `settings.py` 注册 App
 ```python
-# file settings.py
 ...
 ...
 INSTALLED_APPS = [
@@ -465,7 +462,6 @@ INSTALLED_APPS = [
 
 2. 在 settings.py 配置数据
 ```python
-# file settings.py
 ...
 ...
 # 这里使用默认配置
@@ -480,7 +476,6 @@ DATABASES = {
 
 3. 编辑 cmdb/models.py 配置数据库表
 ```pythton
-# file models.py
 from __future__ import unicode_literals
 
 from django.db import models
@@ -607,7 +602,6 @@ Running migrations:
 
 5. 修改 cmdb/views.py ，使其在收到请求之后将数据写入数据库
 ```python
-# file views.py
 ...
 ...
 from cmdb import models
@@ -641,7 +635,6 @@ def login(request):
 
 2. 修改 settings.py 中的数据库配置
 ```python
-# file settings.py
 ...
 ...
 DATABASES = {
@@ -690,6 +683,12 @@ mysql select * from cmdb_userinfo;
 +----+------+--------+
 
 ```
+
+## 知识点
+> migrate 命令将遍历 INTALLED_APPS 设置中的所有项目，在数据库中简历对应的表，并打印消息。
+
+
+
 
 
 
