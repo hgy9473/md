@@ -23,13 +23,56 @@
 在浏览器中打开 `localhost:8080` ，你应该可以看到程序运行的效果。
 ![程序最终效果](./images/cesium01.jpg)
 
-## 关于程序目录
+###关于程序目录
 请看看程序目录！这个程序目录已经尽可能设计得很简单，忽略了很多现在 JS 框架。
 - Source : 应用程序的代码和数据。
 - ThirdParty : 外部库，在这个程序里面只有 Cesium。
 - LICENSE.md : 这个程序的使用条款。
 - index.html : 这个程序主要的网页。
 - server.js : 这个程序的服务器。
+
+查看 `index.html` 文件可以发现它创建了一个 `div` (用于 Cesium 组件) 和一些基本的输入元素。Cesium 组件只是一个普通的 `div`。
+
+`index.html` 文件里有几行代码很重要：
+在 `HTML` 头部的引入 `Cesium.js` 的代码。 `Cesium.js` 定义了 `Cesium` 对象，`Ceisum` 对象包含整个 Cesium 库。
+```html
+<script src="ThirdParty/Cesium/Cesium.js"></script>
+```
+
+`Cesium` 附带了一些组件，他们需要 CSS。
+```html
+<style>@import url(ThirdParty/Cesium/Widgets/widgets.css);</style>
+```
+
+在 `HTML body` 中，需要为 Cesium 查看器组件创建一个 `div `。
+```html
+<div id="cesiumContainer"></div>
+```
+
+最后，需要在 `HTML body` 的结束标签之前添加 `script` 标签引入这个应用程序需要的 JavaScript 脚本。
+```html
+<script src="Source/App.js"></script>
+```
+
+就是这些了。整个 HTML 文件剩余的内容用于收集用户输入，我们后面会用到。
+
+### 开发资料
+遇到问题的时候，在这些资料里也许能找到答案。
+- [Reference Documentation](http://cesiumjs.org/refdoc.html) : 关于 Cesium API 的一份完整的指南，包含很多代码片段。
+- [Sandcastle](https://cesiumjs.org/Cesium/Build/Apps/Sandcastle/index.html) : 一个实时编程环境，附带很多示例。
+- [Tutorials](http://cesiumjs.org/tutorials.html) : 关于 Cesium 开始的详细介绍。
+- [Cesium Forum](http://cesiumjs.org/forum.html) : Cesium 相关的问答资源。
+
+### 开发流程
+在之后的学习中，我们的开发工作基本分为以下 5 个步骤：
+1. 打开 `Source/App.js` 并删除里面的内容。
+2. 复制 `Source/AppSkeleton` 中的内容到 `Source/App.js`。
+3. 确保你的 `cesium-workshop` 下的服务还在运行。
+4. 用浏览器打开 `localhost:8080` ，应该可以看到一个黑色的界面。
+5. 去掉代码注释并保存文件，刷新浏览器查看效果。
+
+
+## 创建查看器（Viewer）
 
 
 
