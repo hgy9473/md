@@ -43,7 +43,7 @@ require([
 全局函数 `require()` （由 Dojo 提供）用于加载模块。为了充分利用 Dojo 的模块化代码库和跨浏览器差异的能力，Esri 的 JavaScript API 构建于 Dojo 的基础之上。如果想了解更多关于 Dojo 和 JavaScript API 之间的关系，可以查看 [Working with Dojo](https://developers.arcgis.com/javascript/jshelp/inside_dojo.html) 和 [Why Dojo](https://developers.arcgis.com/javascript/jshelp/why_dojo.html)。
 
 3. 创建地图
-创建地图使用 `Map` ,`Map` 它是 Map 类（从 `esri/Map` 加载的模块）的引用。 通过传递一个对象给 Map 构造函数可以设定地图属性，例如 `basemap`。
+创建地图使用 `Map` ,`Map` 是 Map 类（从 `esri/Map` 加载的模块）的引用。 通过传递一个对象给 Map 构造函数可以设定地图属性，例如 `basemap`。
 ```javascript
 require([
   "esri/Map",
@@ -59,7 +59,7 @@ require([
 `basemap` 选项的值还可以是：`satellite`、`hybrid`、`topo`、`dark-gray`、`oceans`、`osm`、`national-geographic`。可以在[沙箱](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=intro-mapview) 中试着修改 `basemap`。可以查看 [Map class](https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html) 以了解其他地图选项的详细信息。
 
 4. 创建二维视图
-作为 HTML 文件中的容器，视图参考节点允许用户在 HTML 页面内查看地图。
+视图（View 对象）需要引用节点来呈现地图。
 创建一个 `MapView`，通过它的构造函数设置它的属性:
 ```javascript
 require([
