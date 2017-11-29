@@ -1,4 +1,6 @@
-# 介绍 MapView ，创建一张二维地图
+# 介绍 MapView ，创建一张二维地图 （翻译 Intro to MapView - Create a 2D map）
+
+> 这是一篇英文翻译，原文地址：https://developers.arcgis.com/javascript/latest/sample-code/intro-mapview/index.html
 
 本教程将指导你在二维 MapView 中创建一张简单的地图。
 
@@ -90,6 +92,66 @@ require([
 这里的 `div` 的 id 和传递给 MapView 的构造函数的 `container` 属性的值一样。
 
 5. 设置网页样式
+这里使用 `<head>` 内的 `<style>` 标签来设置网页内容样式。为了使地图充满整个浏览器窗口，需在 `<style>` 中添加下列 CSS 代码。
+```html
+<style>
+  html, body, #viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+</style>
+```
+到此，应用程序已经编写完。完整的代码如下：
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Intro to MapView - Create a 2D map</title>
+<style>
+  html, body, #viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+</style>
+<link rel="stylesheet" href="https://js.arcgis.com/4.5/esri/css/main.css">
+<script src="https://js.arcgis.com/4.5/"></script>
+<script>
+require([
+  "esri/Map",
+  "esri/views/MapView",
+  "dojo/domReady!"
+], function(Map, MapView){
+  var map = new Map({
+    basemap: "streets"
+  });
+  var view = new MapView({
+    container: "viewDiv",  // 引用第 5 步创建额 div
+    map: map,  // 引用 map 对象
+    zoom: 4,  // 设置缩放等级
+    center: [15, 65]  // 设置视图中心
+  });
+});
+</script>
+</head>
+<body>
+  <div id="viewDiv"></div>
+</body>
+</html>
+```
+在[沙箱](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=intro-mapview)的执行效果如下：
+![在沙箱中的执行效果](./images/intro2dview.png)
+
+（完）
+
+<footer style="background:#000;color:white;border-radius:5px;padding:5px;">
+  对我来说，这是翻译，也是学习笔记，主要是为了学习。如果有哪里不对并希望帮助我改进，可邮件：hgy9473@foxmail.com
+</footer>
 
 
 
