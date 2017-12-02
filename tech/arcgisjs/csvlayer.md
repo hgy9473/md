@@ -17,6 +17,10 @@ var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.cs
 esriConfig.request.corsEnabledServers.push(url);
 ```
 
+csv文件内容
+
+![](./images/week.csvExcel.png)
+
 ### 最终效果
 
 完整的代码如下：
