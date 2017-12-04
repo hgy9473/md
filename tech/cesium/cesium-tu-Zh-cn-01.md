@@ -64,6 +64,7 @@
 - [Cesium Forum](http://cesiumjs.org/forum.html) : Cesium 相关的问答资源。
 
 ### 开发流程
+
 在之后的学习中，我们的开发工作基本分为以下 5 个步骤：
 1. 打开 `Source/App.js` 并删除里面的内容。
 2. 复制 `Source/AppSkeleton` 中的内容到 `Source/App.js`。
@@ -73,6 +74,43 @@
 
 
 ## 创建查看器（Viewer）
+
+查看器是 Cesium 应用程序的基础，是一个带有很多现成功能的可交互的三维地球。通过取消注释第一行代码即可添加查看器到名为 cesiumContainer 的 `div`。
+```javascript
+var viewer = new Cesium.Viewer('cesiumContainer');
+```
+
+这一行代码实现了很多内容！你应该可以在执行程序后看到一个简单的地球：
+![](./images/cesium02.jpg)
+
+默认情况下，这个程序能处理鼠标输入和触摸输入。你可以试着尝试以下操作（这些操作功能由 camera 控件提供）：
+- 按住鼠标左键拖动 ：在地球表面平移（实质是沿着地球表面平移相机）。
+- 按住鼠标右键拖动 ：缩放地球。
+- 滚动鼠标滚轮 ：也是缩放地球。
+- 按住鼠标中键拖动 ：沿着地球表面的点旋转地球（实质是旋转相机）。
+
+除了地球之外，查看器还默认附带一些有用的小部件，上图中用数字标出的就是。
+1. Geocoder : 地理编码器，用于搜索位置的工具，它还能飞行到搜索到的位置。
+2. Home Button : 主页按钮，用于返回到默认视图。
+3. Scene Mode Picker : 场景模式选择器，用于在二维视图、三维视图、哥伦布视图之间切换。
+4. Base Layer Picker : 地图选择器，用于选择显示在地球上影像和地形。
+5. Navigation Help Button : 导航辅助按钮，用于显示默认的相机控件。
+6. Animation : 动画控件，用于控制动画播放速度。
+7. Timeline : 时间线控件，用于显示当前的时间位置，可以跳转到时间线上其他位置。
+8. Credits Display : 用于显示数据归属，这个是必须有的。
+9. 全屏按钮 ： 用于全屏显示查看器。
+
+当我们创建查看器的时候，可以通关传递给构造函数的参数来决定包不包含一些默认的功能。在这个程序中，我们可以删除第一行代码，然后取消注释以下几行代码来配置默认功能。
+```javascript
+var viewer = new Cesium.Viewer('cesiumContainer', {
+    scene3DOnly: true,
+    selectionIndicator: false,
+    baseLayerPicker: false
+});
+```
+
+## 添加影像
+
 
 
 
