@@ -238,6 +238,27 @@ Disk Flags:
 // 将 sdb1 分区格式化，文件系统设置为 ext3
 $ mkfs.ext3 /dev/sdb1
 
+```
 
+### `mount` 挂载
+
+> 没有挂载的分区是不能使用的。
+> 分区默认的挂载目录是 /mnt ,理论上可以挂载任何位置。
+> 挂载的时候必须有挂载点
+
+> 通过 mount 手动挂载的分区当系统重启后挂载会失效
+
+```c
+// 创建挂载点
+$ mkdir -p /mnt/hgy1
+
+// 挂载
+$ mount /dev/sdb1 /mnt/hgy1
+
+// 卸载
+$ umount /mnt/hgy1
+
+// 防止重启后挂载失效，在 /etc/fstab 添加一行
+/dev/sdb1       /mnt/hgysdb1    ext3    defaults        0       0
 
 ```
