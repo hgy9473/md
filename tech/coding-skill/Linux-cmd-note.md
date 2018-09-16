@@ -262,3 +262,22 @@ $ umount /mnt/hgy1
 /dev/sdb1       /mnt/hgysdb1    ext3    defaults        0       0
 
 ```
+
+### `用户和用户组`
+
+用户：使用操作系统的人
+用户组：具有相同系统权限的人
+
+```c
+
+// 添加用户组
+$ groupadd market
+
+// 查看group
+$ cat /etc/group
+
+// 修改用户组名
+$ groupmod -n marketD market
+
+```
+
