@@ -6,6 +6,8 @@ Maven 基于项目对象模型（POM）,通过一小段描述信息来管理项�
 
 ## 安装配置
 
+> 注：测试环境 windows 8 / JDK 1.8
+
 ### 系统环境变量配置
 
 M2_HOME .../apache-maven-3.5.4
@@ -244,4 +246,90 @@ public class TalkTest{
 ```c
 mvn archetype:generate -DgroupId=com.hgy.test2 -DartifactId=maven02 -Dversion=1.0.0-SNAPSHOT -Dpackage=com.hgy.test2
 ```
+
+## Maven 标识和仓库
+
+* Maven 中所有 java 库都有唯一的标识（groupId、artifactId 和 version 组成）
+
+* 仓库用于管理项目依赖的 java 库。
+
+* 仓库分为本地仓库和远程仓库。
+
+* 全球中央仓库（The Central Repository）配置于maven*/lib/maven-model-builder*.java/pom*.xml。中央仓库包含了绝大多数开源 java 库。
+
+* Maven 中央仓库服务器位于国内访问不便，可用国内镜像仓库。
+
+* 镜像仓库设置文件在 maven*/conf/settings.xml: `<mirrors>` 标签
+
+* 从远程仓库下载的 java 库和本地使用 install 添加的库都会放到本地仓库中。
+
+* 本地仓库默认是用户目录，可在 maven*/conf/settings.xml: `<localRepository>` 修改。
+
+
+## Eclipse 配置 Maven
+
+> 注：测试用 Eclipse 版本号：Kepler Service Release 2
+
+* Preference -> Java -> Installed JREs，添加 JDK 目录并勾选。
+
+* 双击上一步添加的 JDK 项，设置Default VM arguments 为 -Dmaven.multiModuleProjectDirectory=$M2_HOME
+
+* Preference -> Maven -> Installations，添加 maven 目录并勾选。
+
+* Preference -> Maven -> User Settings，选择 maven 目录下的 settings.xml 文件
+
+### 调试
+
+1. Eclipse 新建 Maven 项目。
+2. 右击项目 -> Run As -> Maven build...，在 Goals 输入框中输入 compile ，单击 Run，即开始编译。
+3. package \ install \ clean \ test 命令也可用此方式执行。
+
+## Maven 项目生命周期
+
+* 完整的项目构建过程包括 清理、编译、测试、打包、集成测试、验证、部署...
+
+* Maven 项目的声明周期：
+
+  * clean 清理项目
+
+  * default 构建项目
+
+  * site 生成项目站点
+
+* clean 清理项目的三个阶段：
+
+  * pre-clean 执行清理前的工作
+
+  * clean 清理上一次构建所生成的文件
+
+  * post-clean 执行清理后的工作
+
+* default 构建项目的主要阶段
+
+  * compile
+
+  * test
+
+  * package
+
+  * install
+
+* site 构建项目的主要阶段
+
+  * pre-site 处理生成项目站点之前要完成的工作
+
+  * site 生成项目的站点文档
+
+  * post-site 处理生成项目站点之后要完成的工作
+
+  * site-deploy 发布生成的站点到服务器
+
+## pom.xml
+
+* pom.xml 是 Maven 项目的核心管理文件，用于项目描述、组织管理、依赖管理和构建信息管理。
+
+
+
+
+
 
