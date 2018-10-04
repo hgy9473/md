@@ -10,7 +10,76 @@
 ## github Desktop
 
 
-# 命令行
+# Git 命令
+
+```c
+// 查看版本
+$ git --version
+
+// 配置
+/*
+git 的配置分为
+  系统级（git config -system）
+  用户级（git config -global）
+  仓库级（git config -local）
+
+  下级配置会覆盖上级配置
+*/
+// 配置用户
+$ git config --global user.name "hgy"
+$ git config --global user.email "1527947721@qq.com"
+// 查看配置
+$ git config --list
+
+// 基本概念及命令
+/*
+工作区：正在编辑的文件的目录/文件夹
+暂存区（stage/index）：git add 命令的意思是 add file contents to the index. 就是把文件暂存到暂存区。把文件添加到暂存区之后Git才会跟踪文件的变化。
+版本库：本地仓库。git commit 命令的意思是 Record changes to the repository. 就是把暂存区的内容写入本地仓库。
+远程仓库：通过网络和本地通信的仓库。git push 的作用就是把本地仓库的变更推送到远程仓库。
+
+*/
+
+// 创建仓库
+// 使用当前目录作为仓库
+$ git init
+// 注释原文： Create an empty Git repository or reinitialize an existing one
+
+// 克隆仓库
+$git clone <repo>
+/*
+ Git 的工作流程一般是
+ 1. 克隆仓库
+ 2. 添加或修改文件
+ 3. 查看他人的修改，合并文件
+ 4. 提交文件、撤回提交
+ ...
+*/
+
+// 把文件变更添加到暂存区// 把要提交的修改放到暂存去，等待执行commit时一次性提交。
+$ git add <file>
+
+// 把暂存区的所有内容提交到仓库
+$ git commit -m <message>
+
+// 查看文件具体修改了什么
+$ git diff <file>
+
+// 查看文件状态
+$ git status
+/*
+ git status 有 4 种提示：
+ 1. Untrackd files: 文件没有添加到暂存区过，版本系统没有跟踪文件变更。
+ 2. Changes not staged for commit: 文件被修改了，还没有添加到暂存区
+ 3. Changes to be commited: 文件被修改了，已经添加到暂存区，等待提交到仓库。
+ 4. nothing to commit, working tree clean: 没有文件被修改。
+
+*/
+
+
+
+
+```
 
 ## Git 服务器搭建
 
