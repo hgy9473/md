@@ -1,21 +1,48 @@
 # Git 版本控制工具使用技巧
 
-## 通用
+## Git 常识
 
 * Git 跟踪管理的是修改，而非文件。文件增删、文件内容的增删改都算是修改。
-* Git 的本地有一个仓库，在本地可以进行版本管理。这是和 SVN 不同的地方之一。
+* 版本越多越好。有备份作用，改动也方便。
+* Git 的本地有一个仓库，在本地可以进行版本管理,不联网也可以进行版本管理。这是和 SVN 不同的地方之一。
+* Git 支持多种协议。https 速度慢而且每次推送都要输入密码。原生的 git 协议速度最快。
 
+---
 
-1. 版本越多越好。有备份作用，改动也方便。
+* 分支的用途：可以提交代码进行版本管理，同时不影响别的分支。
+* HEAD 指的是当前活跃分支的游标，可以用 checkout 命令改变 HEAD 的指向位置。origin 是默认的远程仓库名字。master 是创建仓库时默认的分支名字，一般把 master 分支作为主分支。
 
-## github.com
+---
 
+* 分支策略：master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；干活都在dev分支上，dev分支是不稳定的，到版本发布时，再把dev分支合并到master上，在master分支发布版本；项目每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并。
+* Bug 分支：每个bug都可以通过一个新的临时分支来修复，修复后，合并分支，然后将临时分支删除。
+* feature 分支：开发一个新feature，最好新建一个分支。
 
+---
 
-## github Desktop
+* 分支推送：
+  * master 分支是主分支，因此要时刻与远程同步；
+  * dev 分支是开发分支，团队所有成员都需要在上面工作，所以也需要与远程同步；
+  * bug 分支只用于在本地修复 bug，没必要推到远程，管理上需要看 bug 修复进度。
+  * feature 分支是否推到远程，取决于你是否和你的小伙伴合作在上面开发。
 
+---
 
-# Git 命令
+* 多人协作的工作模式通常是这样：
+
+  * 首先，可以试图用 `git push origin <branch-name>` 推送自己的修改；
+  * 如果推送失败，则因为远程分支比你的本地更新，需要先用 `git pull` 试图合并；
+  * 如果合并有冲突，则解决冲突，并在本地提交；
+  * 没有冲突或者解决掉冲突后，再用 `git push origin <branch-name>` 推送就能成功！
+  * 如果 `git pull` 提示 `no tracking information`，则说明本地分支和远程分支的链接关系没有创建，用命令 `git branch --set-upstream-to <branch-name> origin/<branch-name>` 。
+
+---
+
+* 标签管理：发布一个版本时，我们通常先在版本库中打一个标签（tag），这样，就唯一确定了打标签时刻的版本。将来无论什么时候，取某个标签的版本，就是把那个打标签的时刻的历史版本取出来。所以，标签也是版本库的一个快照。
+
+## Git 命令
+
+### 基本
 
 ```c
 // 查看版本
@@ -46,6 +73,10 @@ $ git config --list
 */
 
 // 生成 SSH Key
+$ ssh-keygen -t rsa -C "youremail@example.com"
+// 这个命令会生成一对密钥（私钥和公钥），私钥通常在保存在 ~/.ssh/id_rsa，公钥通常保存在 ~/.ssh/id_rsa.pub。
+// 当需要向远程仓库推送修改时，需要验证身份。 GitHub 和 码云都是利用 SSH Key 来做身份验证的。只要远程仓库的 SSH Key 列表有推送人的公钥，就可以提交。
+
 
 
 // 创建仓库
@@ -53,23 +84,16 @@ $ git config --list
 $ git init
 // 注释原文： Create an empty Git repository or reinitialize an existing one
 
-// 克隆仓库
-$git clone <repo>
-/*
- Git 的工作流程一般是
- 1. 克隆仓库
- 2. 添加或修改文件
- 3. 查看他人的修改，合并文件
- 4. 提交文件、撤回提交
- ...
-*/
-
 // 把文件变更添加到暂存区// 把要提交的修改放到暂存区，等待执行commit时一次性提交。
 // git add 命令实际上就是把要提交的所有修改放到暂存区（Stage），然后，执行git commit就可以一次性把暂存区的所有修改提交到分支
 $ git add <file>
 
 // 把暂存区的所有内容提交到仓库 commit 针对的是暂存区，也就是只提交被 add 过的修改。
 $ git commit -m <message>
+
+// 删除文件
+$ git rm <file> // 这一步会删除工作区的文件并将修改添加到暂存区。如果再执行一下 commit ，那么版本库将删除这个文件。
+
 
 // 查看文件具体修改了什么 ，diff 可以实现工作区、暂存区、版本库分支、任一提交版本之间相互比较。
 $ git diff <option> <file>
@@ -96,9 +120,12 @@ $ git log
 $ git log --pretty=oneline  // 简化查看日志
 $ git reflog // 查看所有操作记录（包括已经删除的commit和reset操作）git log则是看不出来被删除的commitid
 
+```
 
+### 版本回退
 
-// 版本回退
+```c
+
 //回退到上一个版本
 $ git reset --hard HEAD^
 
@@ -108,8 +135,11 @@ $ git reset --hard HEAD~N
 // 恢复到指定版本（过去和未来版本都行）
 $ git reset --hard <commit ID> // 每一个commit都有唯一的id
 
+```
 
-// 撤销修改
+### 撤销修改
+
+```c
 /*
  撤销修改有 4 种情况
  1. 修改还没有添加到暂存区
@@ -124,15 +154,105 @@ $ git checkout -- <file>
 // 撤销已经添加到暂存区的修改，需要两步：先清理暂存区，再清理工作区
 $ git reset HEAD <file> // 这个操作实际上是移除了暂存区的记录，工作区没受到影响,工作区的文件还是最后一次被编辑完的状态。执行完这一步之后还要执行 git checkout -- <file> 才算撤销完成。
 
+```
 
-// 删除文件
-$ git rm <file> // 这一步会删除工作区的文件并将修改添加到暂存区。如果再执行一下 commit ，那么版本库将删除这个文件。
+### 远程库操作
 
+```c
+// 克隆仓库，默认克隆的是 master 分支，
+$git clone <repo>
+/*
+ Git 的工作流程一般是
+ 1. 克隆仓库
+ 2. 添加或修改文件
+ 3. 查看他人的修改，合并文件
+ 4. 提交文件、撤回提交
+ ...
+*/
 
+// 关联远程仓库
+$ git remote add origin <url>
 
+// 查看远程仓库信息
+$ git remote -v
 
+// 取回远程仓库分支的内容(与当前分支合并)
+$ git pull origin master
 
+// 推送本地仓库master分支的更新到远程仓库
+$ git push origin master
 
+```
+
+### 分支操作
+
+```c
+// 创建分支并切换分支
+$ git checkout -b dev 
+// 等同于 
+// git branch dev  创建分支
+// git checkout dev 切换分支
+
+// 创建远程origin的dev分支到本地
+$ git checkout -b dev origin/dev
+
+//指定本地dev分支与远程origin/dev分支的链接
+$ git branch --set-upstream-to=origin/dev dev
+
+// 查看分支
+$ git branch
+
+// 合并指定分支到当前分支
+$ git merge <branchName>
+// 当当前分支和被合并分支出现冲突时，Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容。可以手动修改冲突文件再提交。 
+// 合并分支时，如果可能，Git会用Fast forward模式，但这种模式下，删除分支后，会丢掉分支信息，看不出来曾经做过合并。如果要强制禁用Fast forward模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息。
+
+// 合并分支，禁用Fast forward模式
+$ git merge --no-ff -m "commit messge" <branchName>
+
+// 查看分支合并图
+$ git log --graph
+
+// 删除分支
+$ git branch -d <branchName>
+
+// 将当前分支的当前状态保存。当前分区工作未完成，需要切换到其他分支临时处理事情是需要这么做。
+$ git stash 
+
+// 查看保存的状态
+$ git stash list
+
+// 恢复状态
+$ git stash pop 
+// 恢复，同时删除 stash 内容
+$ git stash apply // 恢复，不删除 stash 内容
+
+```
+
+### 标签操作
+
+```c
+// 添加标签
+$ git tag <version>
+$ git tag <version> <commitId>
+$ git tag -a <version> -m "version description" <commitId>
+
+// 查看所有标签
+$ git tag
+
+// 查看指定标签
+$ git show <version>
+
+// 删除标签
+$ git tag -d <version>
+
+// 推送标签到远程
+$ git push origin <version> // 推送一个
+$ git push origin --tags // 推送全部
+
+// 删除远程标签
+$ git tag -d <version>
+$ git push origin :refs/tags/<version>
 
 ```
 
@@ -175,6 +295,23 @@ $ git add index.html
 $ git commit -m "add a file"
 $ git push -u origin master
 
-
-
 ```
+
+## GitHub
+
+* GitHub是一个面向开源及私有软件项目的托管平台，因为只支持git 作为唯一的版本库格式进行托管，故名 GitHub。
+* GitHub于 2008 年 4 月 10 日正式上线，除了 Git 代码仓库托管及基本的 Web管理界面以外，还提供了订阅、讨论组、文本渲染、在线文件编辑器、协作图谱（报表）、代码片段分享（Gist）等功能。
+* GitHub 还是一个开源协作社区。
+* 在GitHub上，可以任意Fork开源仓库；自己拥有 Fork 后的仓库的读写权限；可以推送 pull request 给官方仓库来贡献代码。
+
+## 码云
+
+* 码云是开源中国社区 2013 年推出的基于 Git 的完全免费的代码托管服务，这个服务是基于 Gitlab 开源软件所开发的。
+
+* 码云除了提供最基础的 Git 代码托管之外，还提供代码在线查看、历史版本查看、Fork、Pull Request、打包下载任意版本、Issue、Wiki 、保护分支、代码质量检测、PaaS项目演示等方便管理、开发、协作、共享的功能。
+
+
+## 参考资料
+1. [Git 教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+2. [图解 Git](https://marklodato.github.io/visual-git-guide/index-zh-cn.html)
+3. [Git Cheat Sheet](https://www.git-tower.com/blog/git-cheat-sheet/)
