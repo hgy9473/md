@@ -32,7 +32,7 @@ module.exports = {
 
 ## 命令笔记
 
-> webpack版本：2.3.2
+> webpack版本：2.3.2  
 > 项目结构  
 > ├── app  
 > │   └── index.js  
