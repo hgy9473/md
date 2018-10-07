@@ -11,7 +11,11 @@ var path = require('path');
 module.exports = {
     entry: { },
     module: {
-        rules:[ ]
+        rules:[
+          {
+            loader:''
+          }
+        ]
     },
     output: {
         path: '',
@@ -112,5 +116,28 @@ $ npm run start
 
 
 ```
+
+## 配置 js 检查（eslint-loader）
+
+* 在 webpack.config.js 中添加：
+
+```js
+
+  module:{
+    rules:[
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        loader:'eslint-loader',
+        options: {
+          emitWarning: true,
+        },
+      },
+    ],
+  },
+
+```
+
+* 如果代码有错误，用上面的方式去编译就可以看到错误提示，编译会因为有错误而停止。
 
 
