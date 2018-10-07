@@ -140,4 +140,78 @@ $ npm run start
 
 * 如果代码有错误，用上面的方式去编译就可以看到错误提示，编译会因为有错误而停止。
 
+* 可以在 webpack.config.js 中添加配置来实现将编译错误显示到浏览器（WDS 运行时）
+
+```js
+  // file: webpack.config.js
+  // 将错误显示到浏览器
+  devServer:{
+    overlay:{
+      errors:true,
+      warnings:true,
+    },
+  },
+```
+
+## CSS 处理
+
+* css-loader 处理 `@import` `url()` 相关的资源。
+
+* style-loader 处理 style 标签
+
+1. 安装加载器
+
+```c
+// 安装 css 处理插件
+$ npm install css-loader style-loader --save-dev
+
+```
+
+2. 配置加载器
+
+在 webpack.config.js 中增加：
+
+```js
+// 配置css处理器
+  module:{
+    rules:[
+      {
+        test:/\.css$/,
+        use:['style-loader','css-loader'],
+      },
+    ],
+  },
+
+// 注意 css-loader 和 style-loader 的先后顺序不能换
+```
+
+3. 添加 common.js 文件
+
+```js
+// 文件结构如下：
+
+├── app
+│   ├── common.css
+│   └── index.js
+├── build
+├── package-lock.json
+├── package.json
+└── webpack.config.js
+
+// file: common.css
+body{
+  background-color:red;
+}
+
+// file: index.js
+import '../app/common.css';
+//...
+//...
+
+// 构建后可以得到 index.html 和 app.js ,运行 index.html 可以看到 css 的效果。
+
+```
+
+
+
 

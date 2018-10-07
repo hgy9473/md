@@ -17,6 +17,8 @@ $ npm list -g --depth 0
 // 查看局部安装的包
 $ npm list --depth 0
 
+// 查看可用的安装包版本
+$ npm view <package-name> versions
 
 
 
