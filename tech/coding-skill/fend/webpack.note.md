@@ -212,6 +212,10 @@ import '../app/common.css';
 
 ```
 
+## 代码压缩
+
+* 安装配置加载器 `babili-webpack-plugin`
+
 
 
 
