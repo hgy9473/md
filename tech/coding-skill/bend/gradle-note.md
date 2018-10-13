@@ -109,3 +109,44 @@ task mkWebGradleDir(){
 
 3. 执行
 
+## 依赖管理
+
+> 几乎所有的基于 JVM 的软件项目都需要依赖外部类库来重用现有功能。自动化的依赖管理可以明确外部类库的版本，可以解决因传递性依赖带来的版本冲突。
+
+
+> 工件坐标：group、name、version
+
+* 常用仓库： 
+  * 公网仓库：mavenCentral、jcenter
+  * 本地仓库：mavenLocal
+  * 自定义(私有) maven 仓库
+  * 文件仓库：本地机器上的文件路径也可以作为仓库。不常用。不推荐使用。
+
+* 依赖的传递性：如果 A 依赖 B , B 依赖 C ,那么 A 依赖 C
+
+* 依赖的阶段：compile、runtime、testCompile、testRuntime
+
+* 依赖配置
+
+```groovy
+
+// 设置依赖下载仓库
+// 可填写：mavenLocal() mavenCentral() maven{ url:'私有库地址' }
+repositories {
+    mavenCentral()
+}
+
+// 配置依赖
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'ch.qos.logback:logback-classic:1.2.1'
+}
+// 依赖格式有两种：
+// "group:name:version"
+// group:"",name:"",version:""
+
+```
+
+
+
+
