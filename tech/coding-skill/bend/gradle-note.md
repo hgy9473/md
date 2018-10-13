@@ -14,6 +14,8 @@ jar 包：成百上千（各个版本的、有用的没用的）
   * Maven +依赖管理、发布
   * Gradle +Groovy
 
+  > Gradle 兼容 Maven
+
 > Gradle 是一个开源的项目自动化构建工具，建立在 Apache Ant 和 Apache Maven 概念的基础上，并引入了基于 Groovy 的特定领域语言（DSL）,不再使用 XML 来管理构建脚本。
 
 ## 安装 Gradle
@@ -33,4 +35,77 @@ jar 包：成百上千（各个版本的、有用的没用的）
 
 > == 等同于 equals()
 
+## Gradle 项目目录结构
+
+```c
+
+├─build
+├─build.gradle
+└─src
+    ├─main
+    │  ├─java
+    │  ├─resources
+    │  └─webapp
+    └─test
+        ├─java
+        └─resources
+
+
+```
+
+## Gradle 概念
+
+* 一个项目代表一个正在构建的组件。
+* 当构建启动后，Gradle 会基于 build.gradle 实例化一个 org.gradle.api.Project 类。build.gradle 文件中的每一项都在 org.gradle.api.Project 中有对应的方法。
+* 项目的标识（坐标）：version、name、group 
+* `apply` 声明要应用的插件 `dependencies` 声明项目依赖 `repositories` 声明放置依赖的仓库 `task` 声明项目的任务
+
+## 示例：自定义创建目录结构的任务
+
+```groovy
+
+def createDir = {
+    path ->
+        File dir = new File(path);
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+}
+
+task mkJavaGradleDir() {
+    def paths = [
+            'src/main/java',
+            'src/main/resources',
+            'src/test/java',
+            'src/test/resources'
+            ]
+    doFirst{
+        paths.forEach(createDir);
+    }
+
+}
+
+task mkWebGradleDir(){
+    dependsOn 'mkJavaGradleDir'
+    def paths = [
+            'src/main/webapp',
+            'src/main/webapp/WEB-INF',
+            'src/test/webapp'
+    ]
+
+    doLast{
+        paths.forEach(createDir)
+    }
+
+}
+
+```
+
+## 构建生命周期
+
+1. 初始化
+
+2. 配置：生成 task 的执行顺序。
+
+3. 执行
 
