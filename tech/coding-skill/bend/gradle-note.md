@@ -113,11 +113,13 @@ task mkWebGradleDir(){
 
 > 几乎所有的基于 JVM 的软件项目都需要依赖外部类库来重用现有功能。自动化的依赖管理可以明确外部类库的版本，可以解决因传递性依赖带来的版本冲突。
 
+> gradle 没有自己的公共仓库，需要使用 Maven 的仓库。
+
 
 > 工件坐标：group、name、version
 
 * 常用仓库： 
-  * 公网仓库：mavenCentral、jcenter
+  * 公共仓库（中心仓库）：mavenCentral、jcenter
   * 本地仓库：mavenLocal
   * 自定义(私有) maven 仓库
   * 文件仓库：本地机器上的文件路径也可以作为仓库。不常用。不推荐使用。
@@ -147,6 +149,126 @@ dependencies {
 
 ```
 
+## 处理依赖冲突
+
+> gradle 默认的冲突解决方式：统一使用最高版本。
+
+* 查看版本冲突报错需要修改默认策略
+
+```groovy
+// 示例：修改默认策略
+configurations.all {
+    resolutionStrategy{
+        failOnVersionConflict()
+    }
+}
+```
+
+1. 去掉传递性依赖
+
+```groovy
+// 示例：去掉传递性依赖
+dependencies{
+  compile('org.hibernate:hibernate-core:3.6.3.Final'){
+    exclue group:"org.slf4j",module:"slf4j-api
+  }
+}
+
+```
+
+2. 强制指定版本
+
+```groovy
+
+configurations.all {
+    resolutionStrategy{
+      failOnVersionConflict()
+      force:"org.slf4j:slf4j-api:1.7.22"
+    }
+}
+
+```
+
+## 多项目构建
+
+> 企业级项目中常常把一个项目拆分成多个子项目（模块化）。
+
+* 配置要求
+  * 所有项目应用 Java 插件
+  * web 子项目打包成 war
+  * 所有项目添加 logback 日志功能
+  * 统一配置公共属性
+
+* 项目范围：allprojects == root + subprojects
+
+* settings.gradle: 当项目包含多个模块时，settings.gradle 中需要用 include 语句包含子项目。
+
+* 统一配置可以写在 allprojects 或 subprojects 中。各模块的个性化配置写在模块目录下的 build.gradle
+
+* 统一配置可以写在 gradle.properties 中。
+
+```groovy
+// gradle.properties 示例
+
+group=com.hgy.gradle1
+version=1.0-SNAPSHOT
+
+```
 
 
+
+## 测试
+
+* 测试工具配置
+
+```groovy
+// 示例：测试工具配置
+dependencies{
+    testCompile 'junit:junit:4.11'
+}
+
+```
+
+* 测试任务流程：
+
+compileJava -> processTest -> classes -> jar
+-> compileTestJava -> processTestResources -> testClasses -> test
+-> check -> build
+
+* 测试标志
+  * 继承 junit.framework.TestCase 或 groovy.util.GroovyTestCase。
+  * @RunWith 注解
+  * @Test 注解
+
+
+## 发布
+
+> 为了把自己的写的代码提供给别人使用，可以将成果打包发布到本地仓库、私有仓库和中心仓库。
+
+发布配置：
+
+```groovy
+
+allprojects{
+    //////示例：发布配置
+    apply plugin: 'maven-publish'
+
+    publishing{
+        publications{
+            myPublish(MavenPublication){
+                from components.java
+            }
+        }
+        repositories {
+            maven{
+                name "repo-name"
+                url  ""
+            }
+        }
+    }
+}
+
+```
+
+> 发布到的本地仓库的包可以再 用户根目录\.m2\repository 下找到 
 
