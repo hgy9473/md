@@ -232,6 +232,34 @@ devtool:'source-map',
 
 ```
 
+## 代码分类打包
+
+* 之前的配置，webpack 打包后所有 js 代码都在 app.js 里面。
+
+* 通过配置 vendor 和 webpack.optimize.CommonsChunkPlugin, webpack 可将项目中的第三方库以及其他公共代码打包到 vendor.js 中。
+
+```js
+
+// 代码分类打包配置示例
+// file: webpack.config.js
+  entry: {
+    app: PATHS.app,
+    vendor: ['jquery'],
+  },
+
+  plugins:[
+    new HtmlWebpackPlugin({
+      title:'webpack demo',
+    }),
+    plugin,
+    new BabiliPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+    }),
+  ],
+
+```
+
 
 
 
