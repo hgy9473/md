@@ -260,6 +260,27 @@ devtool:'source-map',
 
 ```
 
+## 打包结果统计分析
+
+* 使用可视化工具可以更加直观的查看项目中相关资源的依赖关系、使用情况。
+
+* 配置：
+
+```js
+// file：package.json
+
+  "scripts": {
+    "stats": "webpack --env production --profile --json > stats.json"
+  },
+
+```
+
+* 运行 `npm run stats`，将会在项目根目录生成 stats.json 文件，这个文件中存放了统计结果，使用相关网站可以生成可视化图表。
+
+* 可视化网站：
+  * [Webpack 官方分析工具](http://webpack.github.io/analyse/)
+  * [webpack chart](http://alexkuz.github.io/webpack-chart/)
+  * [http://blog.parryqiu.com/2017/06/16/webpack2-Statistics/](http://blog.parryqiu.com/2017/06/16/webpack2-Statistics/)
 
 
 
