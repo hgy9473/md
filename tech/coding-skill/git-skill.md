@@ -156,6 +156,26 @@ $ git reset HEAD <file> // 这个操作实际上是移除了暂存区的记录�
 
 ```
 
+### 修改文件名
+
+```c
+// 示例：修改文件名
+
+$ git mv Maven-noet.md Maven-note.md
+
+$ git status -s
+//R  Maven-noet.md -> Maven-note.md
+//Git在文件名之前显示R，表示文件已被重命名
+
+$ git commit -m "更正文件名"
+/*
+[master 438c814] 更正文件名
+1 file changed, 0 insertions(+), 0 deletions(-)
+rename tech/coding-skill/bend/{Maven-noet.md => Maven-note.md} (100%)
+*/
+
+```
+
 ### 远程库操作
 
 ```c
