@@ -216,6 +216,22 @@ import '../app/common.css';
 
 * 安装配置加载器 `babili-webpack-plugin`
 
+## Source Map
+
+打包后的文件不方便找到出错的源代码位置，Source Map可以帮忙处理这个问题。
+
+通过 Source Map 相关的配置，webpack 可以再打包时生成 Source Map，这为我们提供了一种源文件和编译成果对应关系图，使得编译后的代码方便调试。
+
+配置示例：
+```js
+
+// source map 配置示例
+// webpack.config.js
+
+devtool:'source-map',
+
+```
+
 
 
 
