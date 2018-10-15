@@ -283,4 +283,150 @@ devtool:'source-map',
   * [http://blog.parryqiu.com/2017/06/16/webpack2-Statistics/](http://blog.parryqiu.com/2017/06/16/webpack2-Statistics/)
 
 
+## 多页面编译
 
+> 以两个页面为例
+
+1. 移除 webpack.config.js 中插件 HtmlWebpackPlugin。
+2. 在项目根目录新建 index.html about.html
+
+```html
+<!-- file : index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>index.html</title>
+  <link rel="stylesheet" href="./build/app.css">
+</head>
+<body>
+  <p>This is index page</p>
+
+  <script src="./build/vendor.js"></script>
+  <script src="./build/index.js"></script>
+</body>
+</html>
+
+```
+
+```html
+<!-- file : about.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>index.html</title>
+  <link rel="stylesheet" href="./build/app.css">
+</head>
+<body>
+  <p>This is about page</p>
+
+  <script src="./build/vendor.js"></script>
+  <script src="./build/about.js"></script>
+</body>
+</html>
+
+```
+
+3. 修改 webpack.config.js 中 entry 配置
+
+```js
+
+// file: webpack.config.js
+
+const path = require('path');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BabiliPlugin = require('babili-webpack-plugin');
+const webpack = require('webpack');
+
+const PATHS = {
+  app: path.join(__dirname, 'app'),
+  build: path.join(__dirname, 'build'),
+};
+
+const plugin = new ExtractTextPlugin({
+  filename: '[name].css',
+  ignoreOrder: true,
+});
+
+module.exports = {
+  devServer:{
+    overlay:{
+      errors: true,
+      warnings: true,
+    },
+  },
+  
+  entry: {
+    index: './app/index.js',
+    about: './app/about.js',
+    vendor: ['jquery'],
+  },
+  module:{
+    rules:[
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        loader:'eslint-loader',
+        options: {
+          emitWarning: true,
+        },
+      },
+      {
+        test:/\.css$/,
+        exclude: /node_modules/,
+        use: plugin.extract({
+          use: {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+          fallback: 'style-loader',
+        }),
+      },
+    ],
+  },
+  output:{
+    path: PATHS.build,
+    filename: '[name].js',
+  },
+  plugins:[
+    // new HtmlWebpackPlugin({
+    //   title:'webpack demo',
+    // }),
+    plugin,
+    new BabiliPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+    }),
+  ],
+};
+
+```
+
+> 最终目录结构(build 是编译之后生成的)
+├── about.html
+├── app
+│   ├── about.js
+│   ├── component.js
+│   ├── index.js
+│   ├── style1.css
+│   └── style2.css
+├── build
+│   ├── about.js
+│   ├── app.css
+│   ├── app.js
+│   ├── index.css
+│   ├── index.js
+│   └── vendor.js
+├── index.html
+├── package.json
+└── webpack.config.js
