@@ -1,18 +1,19 @@
 # Gradle 学习笔记
 
-jar 包：成百上千（各个版本的、有用的没用的）
-测试：能不写就不写。
-打包：用Eclipse 生成 war jar
-部署：FTP 上传
+* 原生开发：
+  * jar 包：成百上千（各个版本的、有用的没用的）
+  * 测试：能不写就不写。
+  * 打包：用Eclipse 生成 war jar
+  * 部署：FTP 上传
 
 * 构建工具的作用：
   * 管理 jar 包
   * 自动测试、打包、发布
 
 * 主流构建工具
-  * Ant 编译、测试、打包
-  * Maven +依赖管理、发布
-  * Gradle +Groovy
+  * Ant： 编译、测试、打包
+  * Maven： Ant + 依赖管理、发布
+  * Gradle: Maven + Groovy
 
   > Gradle 兼容 Maven
 
