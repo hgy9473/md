@@ -54,6 +54,33 @@ mapped statement，对数据进行存储、封装，包括 SQL 语句、输入�
 1. 消除了 SQL，SQL 优化不方便，SQL 定制不方便。
 2. 全映射。
 
+## MyBatis 安装包目录结构
+
+```c
+mybatis-3.2.7
+    lib // MyBatis 依赖的包
+    mybatis-3.2.7.jar //MyBatis 核心包
+```
+
+> 使用 MyBatis 还需要数据库驱动包
+
+## 配置
+
+```python
+# file： config/log4j.properties
+
+# Global logging configuration
+# 全局日志配置：开发环境设置成 DEBUG，生产环境设置成 info或error
+log4j.rootLogger=DEBUG, stdout
+# MyBatis logging configuration...
+log4j.logger.org.mybatis.example.BlogMapper=TRACE
+# Console output...
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n
+
+```
+
 
 ## 参考资料
 
