@@ -31,3 +31,8 @@ ORM 对象关系模型
 * POJO: plain ordinary java object 简单无规则 Java 对象。纯的传统意义的 Java 对象，最基本的 Java Bean，只有属性字段、setter、getter 。
 
 * DAO: data access object 数据访问对象。用于访问数据库，包含各种对数据库的操作，通常和 PO 结合使用。
+
+
+## 测试工具
+
+* Junit 

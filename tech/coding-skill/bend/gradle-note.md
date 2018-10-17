@@ -273,3 +273,5 @@ allprojects{
 
 > 发布到的本地仓库的包可以再 用户根目录\.m2\repository 下找到 
 
+## 参考资料
+1. [《新一代构建工具gradle》](https://www.imooc.com/learn/833).慕课网.www.imooc.com
