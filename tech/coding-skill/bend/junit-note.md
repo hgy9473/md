@@ -35,6 +35,67 @@
 ## 使用技巧
 
 * Eclipse 可以批量生成测试方法
+* 测试套件可以批量运行测试类
+
+```java
+// 测试套件示例
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+
+@RunWith(Suite.class) // 修改测试运行器
+@Suite.SuiteClasses({ATest.class, BTest.class}) // 添加测试类
+public class SuiteTest {
+    //测试套件类不能包含方法
+    //这个测试套件类测试了ATest 和 BTest
+}
+```
+
+* 使用参数化测试可以对一个方法多组参数验证测试
+
+```java
+// 参数化测试示例
+import static org.junit.Assert.*;
+
+import java.util.Arrays;
+import java.util.Collection;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+// 更改测试运行器
+@RunWith(Parameterized.class)
+public class ParameterTest {
+    // 声明变量存放预期值和输入值
+	int expected = 0;
+	int arg1 = 0;
+	int arg2 = 0;
+	
+    // 声明公共静态方法
+	@Parameters
+	public static Collection<Object[]> t(){
+		return Arrays.asList(new Object[][]{
+				{3,2,1},
+				{4,2,2}
+		});
+	}
+	
+    // 声明构造函数
+	public ParameterTest(int expected, int arg1, int arg2){
+		this.expected = expected;
+		this.arg1 = arg1;
+		this.arg2 = arg2;
+	}
+	
+	@Test
+	public void testAdd(){
+		assertEquals(expected, new Calcu().add(arg1, arg2));
+	}
+
+}
+
+```
 
 ## Junit 的反馈类型
 
