@@ -114,6 +114,11 @@ ORM 对象关系模型
 
 * 切面：一个关注点的模块化，这个关注点可能会横切多个对象。
 
+## 模板引擎引擎
+
+* freemarker
+* thymeleaf
+
 
 ## 参考资料
 [1] [《Spring 入门篇》](https://www.imooc.com/learn/196). 慕课网
