@@ -165,6 +165,11 @@ http {
             index  index.html index.htm; # 引导页
         }
 
+        # 设置查看 Nginx 状态的地址
+        location /NginxStatus {
+            stub_status on;
+        }
+
         #error_page  404              /404.html;
 
         # redirect server error pages to the static page /50x.html
@@ -199,7 +204,7 @@ http {
         #}
     }
 
-
+    # 虚拟主机配置
     # another virtual host using mix of IP-, name-, and port-based configuration
     #
     #server {
@@ -214,6 +219,7 @@ http {
     #}
 
 
+    # HTTPS 配置
     # HTTPS server
     #
     #server {
@@ -236,6 +242,46 @@ http {
     #}
 
 }
+
+```
+
+* 虚拟主机配置
+
+虚拟主机配置实现了在一台服务器上配置多个站点（指向同一个ip，同一个端口，指向不同的源码）。
+
+```python
+
+# file nginx.conf 虚拟主机配置示例
+//....
+   server {
+        listen       80;
+        server_name  www.hgy2.com;
+
+        location / {
+            root   html/b; # 服务器的默认网站根目录
+            index  index.html index.htm; # 引导页
+        }
+   }
+
+      server {
+        listen       80;
+        server_name  www.hgy1.com;
+
+        location / {
+            root   html/a; # 服务器的默认网站根目录
+            index  index.html index.htm; # 引导页
+        }
+   }
+
+#  在本机环境可通过：在 C:\Windows\System32\drivers\etc 目录下的 hosts 中增加一行代码来实现
+# --------- file hosts
+
+# .......
+# <本机ip> 域名 域名 ..
+
+192.168.188.138 www.hgy1.com www.hgy2.com
+
+#----------- file hosts
 
 ```
 
