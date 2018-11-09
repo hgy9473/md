@@ -14,6 +14,27 @@ $ cp -a 009 0010
 // 查看单个文件大小
 $ du -hs t.html
 
+// 查看单个文件夹大小
+$ du -sh /etc
+
+// find 命令可根据文件的属性进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间等。
+// 查找文件
+$ find . -name "profile" // 查找位置：当前目录 文件名：profile
+$ find . -name "prof*" // 模糊查找
+
+
+// grep 是根据文件的内容进行查找，会对文件的每一行按照给定的模式(patter)进行匹配查找
+$ grep "location" nginx.conf // 查找 nginx.conf 中包含 location 的行，返回行内容
+$  grep -n "location" nginx.conf // 查找 nginx.conf 中包含 location 的行，返回内容和行号
+$ grep -n "$" *f* // 查找 $,文件名模糊匹配
+
+$ grep -r  "small" ./conf // 查找整个目录，包含子目录
+
+
+
+
+
+
 ```
 
 
