@@ -284,7 +284,5 @@ move set2 1
 * 同时使用 RDB 和 AOF
 
 
-
-
-
-
+## 参考资料
+【1】[《Redis 入门》](https://www.imooc.com/learn/839) . www.imooc.com
