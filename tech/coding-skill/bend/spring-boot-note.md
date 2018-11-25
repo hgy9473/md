@@ -32,3 +32,59 @@
 ## Spring Boot 注解
 
 * `@SpringBootApplication` 主配置类。
+
+
+## Spring Boot 热部署
+
+1. 配置 pom.xml
+
+```xml
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+```
+
+2. 配置application.properties
+
+```python
+
+# 热部署生效
+spring.devtools.restart.enabled=true
+#设置监听目录
+spring.devtools.restart.additional-paths=src/main/java
+
+```
+
+3. 启动项目，修改代码后项目会自动重启
+
+
+## Spring Boot 项目发布
+
+* 方式一：生成 jar 包，命令行运行。
+
+  * 生成 jar 文件：右击项目 -> 【Run As】-> 【Maven Install】
+  * 运行 jar 文件：java -jar `<file>.jar`
+
+* 方式二：生成 war 包，发布到 Tomcat 运行。
+  * 修改 pom.xml 中的 `<packaging>jar</packaging>` 为 `<packaging>war</packaging>`
+  * 在 pom.xml 中添加 tomcat 依赖
+  ```xml
+    <dependency>
+		    <groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+  ```
+  * 修改启动类
+    * 让启动类继承 SpringBootServletInitializer
+    * 在启动类增加方法
+    ```java
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(Demo03Application.class);
+    }
+    ```
+  * 生成 war 文件：右击项目 -> 【Run As】-> 【Maven Install】。
+  * 启动项目：拷贝 war 文件到 tomcat/webapps 目录下，启动 tomcat, 访问项目（注意项目的路径要有 war 文件名）。
