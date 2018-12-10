@@ -88,3 +88,33 @@ spring.devtools.restart.additional-paths=src/main/java
     ```
   * 生成 war 文件：右击项目 -> 【Run As】-> 【Maven Install】。
   * 启动项目：拷贝 war 文件到 tomcat/webapps 目录下，启动 tomcat, 访问项目（注意项目的路径要有 war 文件名）。
+
+
+## 发布、运行后 src/main/webapp 中的资源不能访问
+
+1. 在 Package Explorer 视图中右击项目 -> 【Build Path】-> 【Configure Build Path】, 【Source】 -> 【Add Folder】, 勾选 src/main/webapp 。
+
+2. 在 pom.xml 中添加配置
+
+```xml
+<build>
+    <resources>
+        <resource>
+            <directory>${basedir}/src/main/webapp</directory>
+      <targetPath>META-INF/resources</targetPath>
+            <includes>
+                <include>**/**</include>
+            </includes>
+        </resource>
+        <resource>
+            <directory>${basedir}/src/main/resources</directory>
+            <includes>
+                <include>**/**</include>
+            </includes>
+        </resource>
+    </resources>
+</build>
+```
+
+3. 重新执行 Maven install
+
