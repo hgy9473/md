@@ -25,7 +25,7 @@ $ find . -name "prof*" // 模糊查找
 
 // grep 是根据文件的内容进行查找，会对文件的每一行按照给定的模式(patter)进行匹配查找
 $ grep "location" nginx.conf // 查找 nginx.conf 中包含 location 的行，返回行内容
-$  grep -n "location" nginx.conf // 查找 nginx.conf 中包含 location 的行，返回内容和行号
+$ grep -n "location" nginx.conf // 查找 nginx.conf 中包含 location 的行，返回内容和行号
 $ grep -n "$" *f* // 查找 $,文件名模糊匹配
 
 $ grep -r  "small" ./conf // 查找整个目录，包含子目录
@@ -325,4 +325,25 @@ $ firewall-cmd --state
 //查看默认防火墙状态（关闭后显示notrunning，开启后显示running）
 ```
 
+## 进程管理
+
+```c
+// 查看所有进程
+$ ps -A
+$ ps -ef
+
+// 查看是否有mysql
+$ ps -A | grep mysql
+
+// 查看内存使用说明 (shift+m 按照排名)
+$ top
+
+// 查看端口占用
+$ netstat -lntp
+
+
+
+
+
+```
 

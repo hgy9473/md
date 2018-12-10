@@ -179,6 +179,10 @@ $ yum list
 // 查看指定软件安装情况
 $ yum list package-name
 
+// 查看已安装的软件
+$ yum list installed
+$ yum list installed | grep mysql // 查看 mysql 是否安装
+
 // 查看可更新软件
 $ yum check-update
 
@@ -190,6 +194,7 @@ $ yum install package-name
 
 // 查找软件包
 $ yum search package-name
+
 
 ```
 
