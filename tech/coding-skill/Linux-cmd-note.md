@@ -2,9 +2,27 @@
 
 > 注：测试环境 Ubuntu  18.04
 
-[TOC]
+## 常用操作
 
-## 文件管理
+
+```c
+// 查看操作系统版本
+cat /etc/redhat-release
+
+
+// 清空屏幕
+$ clear
+
+
+// 下载文件
+$ wget http://sw.bos.baidu.com/sw-search-sp/software/3756358c42c34/npp_7.5.1_Installer.exe
+
+// 重启系统
+$ reboot
+
+```
+
+## 文件操作
 
 ```c
 // 复制文件夹 009，并重命名为 0010
@@ -31,9 +49,38 @@ $ grep -n "$" *f* // 查找 $,文件名模糊匹配
 $ grep -r  "small" ./conf // 查找整个目录，包含子目录
 
 
+// 切换目录
+$ cd test
+// 切换到根目录
+$ cd /
+// 切换到用户目录
+$ cd ~
+
+// 解压文件
+// 解压 .tar.gz 文件
+$ tar -xzvf file.tar.gz 
+// 解压 .zip 文件
+$ unzip file.zip
 
 
+// 新建文件夹
+$ mkdir newfolder
 
+
+// 新建文件
+$ touch file.format
+
+// 移动文件夹
+// 移动 test 到根目录
+$ mv test /
+
+// 删除文件
+$ rm npp_7.5.1_Installer.exe
+
+// 删除文件夹
+$ rm -rf demosite
+// r 删除所有子目录
+// f 删除过程不提示
 
 ```
 
@@ -326,17 +373,23 @@ $ su hgy
 ## 防火墙
 
 ```c
+
 $ systemctl stop firewalld.service //停止firewall
+
+// 开启防火墙
+$ systemctl start firewalld.servive
 
 $ systemctl disable firewalld.service //禁止firewall开机启动
 
-$ firewall-cmd --state 
 //查看默认防火墙状态（关闭后显示notrunning，开启后显示running）
+$ firewall-cmd --state
+
 ```
 
 ## 进程管理
 
 ```c
+
 // 查看所有进程
 $ ps -A
 $ ps -ef
@@ -349,10 +402,6 @@ $ top
 
 // 查看端口占用
 $ netstat -lntp
-
-
-
-
 
 ```
 
