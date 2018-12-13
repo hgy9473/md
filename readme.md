@@ -41,4 +41,8 @@
 
 * [vi 使用笔记](./tech/coding-skill/vi-note.md)
 
-* [Linux 命令笔记](/tech/coding-skill/Linux-cmd-note.md)
+* [Linux 命令笔记](./tech/coding-skill/Linux-cmd-note.md)
+
+* [VMware CentOS 使用笔记](./tech/coding-skill/centos-vmware-note.md)
+
+* [CentOS yum 使用笔记](./tech/coding-skill/centos-yum-note.md)
