@@ -1,9 +1,11 @@
 # Django 笔记
+
 >>> - - -  -  - **测试环境操作系统：CentOS 7**
 
 [TOC]
 
 ## 简介
+
 > Django 是一个开源的 Web 应用框架，由 Python 写成，初次发布于 2005 年 7 月。Django 采用了 MVC 软件设计模式。
 
 Django 版本和对应的 Python 版本
@@ -19,9 +21,12 @@ Django 版本和对应的 Python 版本
 
 
 ## 创建第一个项目
+
 ```c
 django-admin.py startproject HelloWorld
+
 ```
+
 > 目录结构
 >   |-- HelloWorld 项目的容器
 >   |   |-- __init__.py  一个空文件，告诉 Python 该目录是一个 Python 包
@@ -31,13 +36,16 @@ django-admin.py startproject HelloWorld
 >   `-- manage.py 一个实用的命令行工具，可让你以各种方式与该 Django 项目进行交互
 
 ## 运行第一个项目
+
 ```
 python manage.py runserver 0.0.0.0:8001
 ```
+
 ![Django HelloWorld](./images/django00.png)
 
 
 ## 创建第二个项目
+
 > 参考：https://www.cnblogs.com/feixuelove1009/p/5823135.html
 
 1.新建项目
@@ -89,10 +97,13 @@ python manage.py startapp cmdb
 ```
 
 3. 编写路由
+
 ```c
 vi website2/urls.py
 ```
+
 编辑文件 `urls.py`
+
 ```python
 from django.conf.urls import url
 from django.contrib import admin
@@ -107,31 +118,41 @@ urlpatterns = [
 ```
 
 4. 编写路由响应
+
 ```c
 vi cmdb/views.py
 ```
+
 编辑文件 `views.py`
+
 ```python
+
 from django.shortcuts import HttpResponse
 
 def index(request):
     return HttpResponse("Hello,Django")
 
 ```
+
 5. 启动服务 并测试
+
 ```c
 python manage.py runserver 0.0.0.0:8001
 ```
+
 ![第二个 Django 项目效果](./images/django01.png)
 
 
 ## 响应一个 HTML 文件
 
 > 之前都是返回的是字符串。
+
 1. templates 下写一个 HTML 文件
+
 ```c
 vi templates/index.html
 ```
+
 ```html
 <!-- file index.html -->
 <!DOCTYPE>
@@ -148,6 +169,7 @@ vi templates/index.html
 </html>
 
 ```
+
 ```c
 // 查看目录结构
 /*
@@ -181,9 +203,11 @@ vi templates/index.html
 */
 ```
 2. 修改 views.py
+
 ```c
 vi cmdb/views.py
 ```
+
 编辑文件 `views.py`
 ```python
 #from django.shortcuts import HttpResponse
@@ -196,10 +220,13 @@ def index(request):
 
 ```
 3. 在 website2/settings.py 配置 TEMPLATES 路径
+
 ```c
 vi websites/settings/py
 ```
+
 编辑文件 `settings.py`
+
 ``` python
 ...
 ...
@@ -223,12 +250,14 @@ TEMPLATES = [
 ...
 ```
 4. 重启服务 并测试
+
 ```c
 python manage.py runserver 127.0.0.1:8001
 ```
 ![Django 响应HTML文件的效果](./images/django02.png)
 
 ## 响应静态文件
+
 1. 新建 static 目录
 ```c
 /*查看文件目录结构
@@ -266,7 +295,9 @@ python manage.py runserver 127.0.0.1:8001
 */
 
 ```
+
 2. 在 static/css 下面写一个 css 文件
+
 ```css
 /* file article01.css */
 html{
@@ -284,6 +315,7 @@ body{
 
 
 3. 在 website2/settings.py 配置静态文件目录
+
 ```python
 ...
 ...
@@ -297,13 +329,16 @@ STATICFILES_DIRS = (
 ```
 
 4. 重启服务 并测试
+
 ```
 python manage.py runserver 127.0.0.1:8001
 ```
 ![Django 访问静态文件效果](./images/django03.png)
 
 ## 接受用户请求的数据
+
 1. 在 templates 目录编写一个登录页面
+
 ```html
 <!-- file login.html -->
 <!DOCTYPE>
@@ -326,7 +361,9 @@ python manage.py runserver 127.0.0.1:8001
 
 </html>
 ```
+
 2. 修改 cmdb/views.py，设置请求处理
+
 ```python
 ...
 ...
@@ -346,7 +383,9 @@ def login(request):
 ...
 
 ```
+
 3. 修改 website2/urls.py 设置路由
+
 ```python
 # file urls.py
 from django.conf.urls import url
@@ -360,7 +399,9 @@ urlpatterns = [
 ]
 
 ```
+
 4. 编辑 website2/settings.py 关闭 csrf 限制
+
 ```python
 ...
 ...
@@ -378,12 +419,15 @@ MIDDLEWARE_CLASSES = [
 ...
 ```
 5. 运行，查看效果
+
 ![Django 测试登录界面](./images/django04.png)
 ![Django 测试登录完成](./images/django05.png)
 
 
 ## 用动态页面响应请求--使用模板
+
 1. 修改 cmdb/views.py 使其传递数据给模板
+
 ```python
 ...
 ...
@@ -407,7 +451,9 @@ def login(request):
 ...
 
 ```
+
 2. 在 templates 目录下面写一个模板文件
+
 ```html
 <!-- file userlist.html -->
 <!DOCHTML>
@@ -438,10 +484,13 @@ def login(request):
 </html>
 
 ```
+
 3. 运行程序，查看效果
+
 ![Django 使用模板](./images/django06.png)
 
 ## 使用数据库
+
 1. 在 `settings.py` 注册 App
 ```python
 ...
@@ -461,6 +510,7 @@ INSTALLED_APPS = [
 ```
 
 2. 在 settings.py 配置数据
+
 ```python
 ...
 ...
@@ -475,7 +525,8 @@ DATABASES = {
 ...
 
 3. 编辑 cmdb/models.py 配置数据库表
-```pythton
+
+```python
 from __future__ import unicode_literals
 
 from django.db import models
@@ -484,6 +535,7 @@ class UserInfo(models.Model):
     user = models.CharField(max_length=32)
     pwd = models.CharField(max_length=32)
 ```
+
 ```c
 /*查看此时的文件目录结构
 [hgy@centosh website2]$ tree
@@ -527,6 +579,7 @@ class UserInfo(models.Model):
 ```
 
 4. 创建表
+
 ```c
 [hgy@centosh website2]$ python manage.py makemigrations
 /* 输出
@@ -601,6 +654,7 @@ Running migrations:
 ```
 
 5. 修改 cmdb/views.py ，使其在收到请求之后将数据写入数据库
+
 ```python
 ...
 ...
@@ -629,11 +683,13 @@ def login(request):
 ![Django 数据库测试效果](./images/django07.png)
 
 ## Django 配置 MySQL 数据库
+
 > 之前使用的是默认的 sqlite
 1. 安装 MySQL
 具体步骤可参见[CentOS-mysql-note.md](./CentOS-mysql-note.md)
 
 2. 修改 settings.py 中的数据库配置
+
 ```python
 ...
 ...
@@ -655,6 +711,7 @@ DATABASES = {
 ```
 
 3. 创建数据库
+
 ```c
 // 登录
 mysql -u root -p
@@ -663,6 +720,7 @@ mysql> create database test;
 ```
 
 4. 创建表
+
 ```c
 python manage.py makemigrations
 
@@ -670,22 +728,25 @@ python manage.py migrate
 ```
 
 5. 测试程序，查看效果
+
 ![Django MySQL配置](./images/django08.png)
 
 ```c
+
 mysql use test;
 mysql select * from cmdb_userinfo;
-+----+------+--------+
-| id | user | pwd    |
-+----+------+--------+
-|  1 | abf  | afbg   |
-|  2 | jkl; | asdfgh |
-+----+------+--------+
+// +----+------+--------+
+// | id | user | pwd    |
+// +----+------+--------+
+// |  1 | abf  | afbg   |
+// |  2 | jkl; | asdfgh |
+// +----+------+--------+
 
 ```
 
 ## 知识点
-> migrate 命令将遍历 INTALLED_APPS 设置中的所有项目，在数据库中简历对应的表，并打印消息。
+
+> migrate 命令将遍历 INTALLED_APPS 设置中的所有项目，在数据库中建立对应的表，并打印消息。
 
 
 
