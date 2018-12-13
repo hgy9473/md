@@ -52,3 +52,13 @@ mysql -uroot -p
 mysql> quit
 
 ```
+
+## 连接 Navicat for MySQL
+https://blog.csdn.net/szu_Vegetable_Bird/article/details/80216201
+https://www.linuxidc.com/Linux/2017-01/139622.htm
+https://blog.csdn.net/xuexiaoxu1990/article/details/52487571
+https://blog.csdn.net/wailaizhu/article/details/53488954
+
+## 权限管理
+
+https://www.cnblogs.com/SQL888/p/5748824.html
