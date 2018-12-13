@@ -1,6 +1,6 @@
 # ESLint 使用笔记
 
-> 环境： ESLint@5.6.1 Node@8.12.0
+> 环境： ESLint@5.6.1 Node@8.12.0   |   Visual Studio Code
 
 ## 安装 ESLint
 
