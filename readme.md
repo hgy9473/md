@@ -46,3 +46,7 @@
 * [VMware CentOS 使用笔记](./tech/coding-skill/centos-vmware-note.md)
 
 * [CentOS yum 使用笔记](./tech/coding-skill/centos-yum-note.md)
+
+* [在 CentOS 中搭建 Python + uwsgi + nginx 服务器环境](./tech/coding-skill/centos-yum-note.md)
+
+* [Django 笔记](./tech/coding-skill/django-note.md)
