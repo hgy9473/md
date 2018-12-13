@@ -2,7 +2,6 @@
 
 >>> - - -  -  - **测试环境操作系统：CentOS 7**
 
-
 ## 简介
 
 > Django 是一个开源的 Web 应用框架，由 Python 写成，初次发布于 2005 年 7 月。Django 采用了 MVC 软件设计模式。
@@ -26,12 +25,12 @@ django-admin.py startproject HelloWorld
 
 ```
 
-> 目录结构
->   |-- HelloWorld 项目的容器
->   |   |-- __init__.py  一个空文件，告诉 Python 该目录是一个 Python 包
->   |   |-- settings.py
->   |   |-- urls.py 该 Django 项目的 URL 声明; 一份由 Django 驱动的网站"目录"
->   |   `-- wsgi.py 一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目
+> 目录结构  
+>   |-- HelloWorld 项目的容器  
+>   |   |-- __init__.py  一个空文件，告诉 Python 该目录是一个 Python 包  
+>   |   |-- settings.py  
+>   |   |-- urls.py 该 Django 项目的 URL 声明; 一份由 Django 驱动的网站"目录"  
+>   |   `-- wsgi.py 一个 WSGI 兼容的 Web 服务器的入口，以便运行你的项目  
 >   `-- manage.py 一个实用的命令行工具，可让你以各种方式与该 Django 项目进行交互
 
 ## 运行第一个项目
