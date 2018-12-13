@@ -312,6 +312,15 @@ $ cat /etc/group
 // 修改用户组名
 $ groupmod -n marketD market
 
+// 切换用户
+// su 命令让你在不登出当前用户的情况下登录为另外一个用户。
+
+// 切换到 root 用户，不退出当前用户
+$ su root
+
+// 切换回去
+$ su hgy
+
 ```
 
 ## 防火墙
