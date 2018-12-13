@@ -3,7 +3,8 @@
 ## 1. HTTP Gzip 压缩传输
 
 > 问题：网络传输大文件（MB级别）的文件传输确实消耗很多时间，即便服务器搭建在本地也慢。
-> 观察淘宝、天猫、京东以及各免费 CDN 网站，可以发现他们都用了 gzip 压缩。
+
+> 观察淘宝、天猫、京东以及各免费 CDN 网站，发现他们都用了 gzip 压缩。
 
 ![no gzip](../../images/cdntest_Cesium2.js.jpg)
 
@@ -80,4 +81,5 @@
 
 ## 参考资料
 【1】[Tomcat启用GZIP压缩，提升web性能](http://www.cnblogs.com/DDgougou/p/8675504.html)
+
 【2】[Tomcat8使用gzip压缩JS,CSS文件](https://www.cnblogs.com/imaxue/p/6867324.html)
