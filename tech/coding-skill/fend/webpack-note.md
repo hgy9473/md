@@ -413,6 +413,7 @@ module.exports = {
 ```
 
 > 最终目录结构(build 是编译之后生成的)
+```c
 ├── about.html
 ├── app
 │   ├── about.js
@@ -430,3 +431,4 @@ module.exports = {
 ├── index.html
 ├── package.json
 └── webpack.config.js
+```
