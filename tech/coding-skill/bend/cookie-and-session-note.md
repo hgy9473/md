@@ -157,9 +157,13 @@ session 机制 是一种服务器端的机制，服务器使用一种类似于�
 ## 参考资料
 
 【1】《JavaScript 高级程序设计》第三版 P629
+
 【2】《HTTP cookies》. MDN . [https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Cookies](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Cookies)
+
 【3】《session》 . CSDN . https://blog.csdn.net/keda8997110/article/details/16922815
+
 【4】《Java Web(三) 会话机制，Cookie和Session详解》 . CSDN . https://www.cnblogs.com/whgk/p/6422391.html
+
 【5】《 HTTP无状态协议和 cookie、session 原理》 . segmentfault . https://segmentfault.com/a/1190000009518499
 
 
