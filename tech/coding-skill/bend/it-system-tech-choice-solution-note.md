@@ -2,7 +2,7 @@
 
 ## 后端
 
-- 硬件
+- 硬件和操作系统
   - 操作系统: Linux/Windows
   - 带宽
   - 内存
@@ -32,22 +32,20 @@
 - UI 小组件
   - 表格
   - 对话框
-  - 日期选择框
+  - 日历
   - 分页
   - 进度条
   - 弹窗
   - 图片浏览器
   - 轮播
-  - 输入框
-  - 文本框
-  - 下拉框
-  - 单选、多选
-  - 按钮
+  - 表单控件（输入框、文本框、下拉框、单选、多选、按钮、日期选择框）
   - 下拉搜索
   - 结构树
 
 - 重型功能
   - 各种格式文档预览
+  - 视频
+  - 音乐
 
 - 数据可视化
   - 流程图
@@ -64,7 +62,26 @@
   - CDN
   - 混合
 
+
+- 技术方案0
+![dd](../../images/fend-old-solution-1.jpg)
+  - 业务逻辑（数据计算和 DOM 操作）: `jQuery`
+  - UI 组件
+    - 日期控件: `jQuery-ui` / `Easy-UI` / `Bootstrap-DateTimePicker` / `dhtmlx(DHX)` / `My97DatePicker`
+    - 日历控件: `Kalendae`
+    - 表单控件: `Bootstrap` / `Layui`
+    - 表格: `Bootstrap` / `Layui`
+    - 结构树: `zTree`
+    - 进度条: `spin.js`
+    - 轮播: `Bootstrap`
+    - 弹窗:  `Bootstrap` / `Layui`
+    - 下拉搜索: `selectivity`
+
+  - 图表: `Echarts` / `HighCharts`
+
+
+
 - 技术方案1
-  - 业务逻辑: `Vue.js` + `Axios`
+  - 业务逻辑（数据计算和 DOM 操作）: `Vue.js` + `Axios`
   - UI 组件: `Element`
   - 图表: `Echarts`
