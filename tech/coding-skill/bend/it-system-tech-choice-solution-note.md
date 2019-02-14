@@ -3,7 +3,7 @@
 ## 后端
 
 - 硬件和操作系统
-  - 操作系统: Linux/Windows
+  - 操作系统: `Linux` / `Windows`
   - 带宽
   - 内存
   - CPU
@@ -11,21 +11,23 @@
   - 网络范围: 内网/外网
 
 - 软件
-  - 语言: `Java` / `Python` / `JavaScript` / `PHP` ...
+  - 语言: `Java` / `Python` / `JavaScript` / `PHP` ...以下以 `Java` 为例
   - 数据库管理系统: `MySQL` / `Oracle` ...
   - 持久层框架: `MyBatis` / `Hibernate` ...
-  - 消息队列框架: MQ
-  - 权限管理框架: Shiro
-  - 缓存数据库: Redis
-  - 依赖管理工具: `Maven` / `Gradle`
-  - 负载均衡: Nginx
-  - 核心框架: `Spring` / `Django`
-  - 工作流框架: Activity
-  - 日志框架: Log4j
-  - 安全
-  - 备份
+  - 消息队列框架: `ActiveMQ` / `Kafka` / `RocketMQ`
+  - 缓存: `Redis` / `Memcache` / `Ehcache`
+  - 项目构建和依赖管理: `Maven` / `Gradle`
+  - 核心框架: `Spring`
+  - 工作流: `Activiti`
+  - 日志框架: `Log4j`
+  - 单元测试: `Junit`
+  - 安全: `Shiro`
   - 实时数据处理
-  - 大数据搜索
+  - 大数据搜索: `Elasticsearch`
+  - 大数据: `Hbase` / `Hadoop`
+  - 负载均衡
+  - 备份
+  - 集群
 
 ## 前端
 
