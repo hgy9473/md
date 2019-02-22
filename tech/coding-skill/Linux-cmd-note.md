@@ -405,3 +405,54 @@ $ netstat -lntp
 
 ```
 
+## 和 Windows 互传文件
+
+```c
+// 传文件到 Linux， 在 Windows 操作
+$ pscp I:\note.txt root@118.24.85.114:/root/hkeys/
+
+// 传文件到 Windows，在 Windows 操作
+$ pscp -r root@118.24.85.114:/root/hkeys H:\temp\
+
+//////////////////////help////////////////////////////
+/*
+
+PuTTY Secure Copy client
+Release 0.70
+Usage: pscp [options] [user@]host:source target
+       pscp [options] source [source...] [user@]host:target
+       pscp [options] -ls [user@]host:filespec
+Options:
+  -V        print version information and exit
+  -pgpfp    print PGP key fingerprints and exit
+  -p        preserve file attributes
+  -q        quiet, don't show statistics
+  -r        copy directories recursively
+  -v        show verbose messages
+  -load sessname  Load settings from saved session
+  -P port   connect to specified port
+  -l user   connect with specified username
+  -pw passw login with specified password
+  -1 -2     force use of particular SSH protocol version
+  -4 -6     force use of IPv4 or IPv6
+  -C        enable compression
+  -i key    private key file for user authentication
+  -noagent  disable use of Pageant
+  -agent    enable use of Pageant
+  -hostkey aa:bb:cc:...
+            manually specify a host key (may be repeated)
+  -batch    disable all interactive prompts
+  -proxycmd command
+            use 'command' as local proxy
+  -unsafe   allow server-side wildcards (DANGEROUS)
+  -sftp     force use of SFTP protocol
+  -scp      force use of SCP protocol
+  -sshlog file
+  -sshrawlog file
+            log protocol details to a file
+
+*/
+
+```
+
+
