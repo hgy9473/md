@@ -193,6 +193,9 @@ $git clone <repo>
 // 关联远程仓库
 $ git remote add origin <url>
 
+// 切断远程仓库关联
+$ git remote rm origin
+
 // 查看远程仓库信息
 $ git remote -v
 
@@ -221,6 +224,12 @@ $ git branch --set-upstream-to=origin/dev dev
 
 // 查看分支
 $ git branch
+
+// 查看远程仓库分支
+$ git branch -r
+
+// 推送本地的 dev 分支到远程的 dev 分支（如果远程库没有会自动创建）
+$ git push origin dev:dev
 
 // 合并指定分支到当前分支
 $ git merge <branchName>
