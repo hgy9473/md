@@ -40,6 +40,14 @@ graph TD;
 
 **Pix4D** 法国 INFOTERRA 公司的像素（Pixel Factory）StreetFactory 通过对影像进行几何处理、多视匹配、三角网构件，提取典型地物的纹理特征，并对纹理进行可视化处理，最终得到三维模型。
 
+```mermaid
+graph TD;
+  A --> B;
+  A --> C;
+  B --> D;
+  C --> D;
+```
+
 
 
 **PhotoScan** 主要用来辅助空三处理，也可以生成DOM和DSM
