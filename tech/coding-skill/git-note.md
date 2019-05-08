@@ -249,8 +249,15 @@ $ git branch -d <branchName>
 // 如项目在并行开发两个版本的程序，分支为：App1-dev App2-dev
 // App1-dev 完成了一个功能X开发，想应用到 App2-dev。
 // 一种方式是手动修改文件
-// 另一种方式是将功能X的的提交作为一个新的提交引入 App2-dev 分支
+// 另一种方式是使用cherry-pick将功能X的的提交作为一个新的提交引入 App2-dev 分支
+// cherry-pick 命令执行后可能会有冲突，手动处理冲突后在add 、 commit之后，cherry-pick 才算完成。
 $ git cherry-pick f4381b0c95b123
+
+// pick 区间(idx1, idx2]之间的提交当当前分支
+$ git cherry-pick idx1..idx2
+
+// pick 区间[A, B]之间的提交当当前分支
+$ git cherry-pick A^..B
 
 
 // 将当前分支的当前状态保存。当前分区工作未完成，需要切换到其他分支临时处理事情是需要这么做。
