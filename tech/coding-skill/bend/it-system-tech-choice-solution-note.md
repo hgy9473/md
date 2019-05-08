@@ -65,7 +65,7 @@
   - 混合
 
 
-- 技术方案0
+- 技术方案0（传统）
 ![dd](../../images/fend-old-solution-1.jpg)
   - 业务逻辑（数据计算和 DOM 操作）: `jQuery`
   - UI 组件

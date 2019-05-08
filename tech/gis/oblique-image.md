@@ -51,10 +51,6 @@ graph TD;
 
 **Pix4D** 法国 INFOTERRA 公司的像素（Pixel Factory）StreetFactory 通过对影像进行几何处理、多视匹配、三角网构件，提取典型地物的纹理特征，并对纹理进行可视化处理，最终得到三维模型。
 
-**PhotoScan** 主要用来辅助空三处理，也可以生成DOM和DSM
-
-
-**EPS** 用来生成垂直摄影模型或导入倾斜摄影模型绘制DLG
 
 ## 倾斜模型修补软件
 
@@ -83,11 +79,6 @@ graph TB;
 - **osg(osgb)** : 全称为 Open Scene Graph Binary。这个格式的文件小而多，一般不会直接打开，而是通过索引文件加载。obj 文件一般包括三个子文件，分别是 \*.obj、\*.mtl、\*.jpg。
 
 - **fbx** : FBX 是 FilmBoX 这套软件所使用的格式，后改称 Motionbuilder。
-
-## 各平台对倾斜摄影模型大小的支持
-
-> SuperMap 300 GB 400 平方公里
-> ————《超图倾斜摄影解决方案（技术白皮书）》
 
 
 ## 相关功能

@@ -24,6 +24,43 @@ GIS 的呈现效果一般是抽象而且宏观的（在哪里，有什么，周�
 来源：第十六届 Esri 中国用户大会 《BIM+GIS技术专题》
 
 
+## GIS BIM 平台合作
+
+- Esri + Autodesk
+
+- SuperMap + Dassault Systemes
+
+## 数据整合方案
+
+```mermaid
+graph TD;
+
+Revit --插件--> SuperMap
+Bentley --插件--> SuperMap
+CATIA --插件--> SuperMap
+
+```
+
+```mermaid
+graph TD;
+
+Revit --原生支持--> ArcGIS
+Bentley --插件--> ArcGIS
+CATIA --插件--> ArcGIS
+
+```
+
+## 相关数据标准
+
+- i3s
+- s3m
+
+
+
+
+
+
+
 ## 参考资料
 
 【1】百度百科

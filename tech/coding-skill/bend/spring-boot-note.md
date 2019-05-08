@@ -118,3 +118,72 @@ spring.devtools.restart.additional-paths=src/main/java
 
 3. 重新执行 Maven install
 
+
+
+## 整合 Mybatis 
+
+
+
+## 关于 Spring Boot 中 pom.xml
+
+### Spring Boot 父级依赖
+
+```xml
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.5.1.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+</parent>
+```
+
+有了这个，当前的项目就是 Spring Boot 项目了，spring-boot-starter-parent 是一个特殊的 starter,它用来提供相关的 Maven 默认依赖，使用它之后，常用的包依赖可以省去 version 标签。
+
+### starter 依赖
+
+Spring Boot 提供了很多 “开箱即用” 的依赖模块，都是以 spring-boot-starter-xx 作为命名的。
+
+
+## 关于 application.properties
+
+Spring Boot 使用了一个全局的配置文件 application.properties 。
+
+application.properties 提供自定义属性的支持。在要使用的地方通过注解 @Value(value="${config.name}")就可以绑定到想要的属性上。
+
+```java
+
+//...
+@MapperScan("com.example.dao")
+public class DataSourceConfiguration {
+    @Value("${jdbc.driver}")
+    private String jdbcDriver;
+    @Value("${jdbc.url}")
+    private String jdbcUrl;
+    @Value("${jdbc.username}")
+    private String jdbcUsername;
+    @Value("${jdbc.password}")
+
+//...
+
+```
+
+在 application.properties 中的各个参数之间也可以直接引用来使用。
+
+```python
+
+com.ex.name="zhangsanfeng"
+com.ex.age="23"
+com.ex.aliasname=${com.ex.name}
+
+
+```
+
+如果不希望把所有配置都放在 application.properties 里面，可以另外定义一个，通过注解 @Configuration 和 @PropertySource 引入。
+
+配置文件中 ${random} 可以用来生成各种不同类型的随机值
+
+## 参考资料
+
+【1】http://tengj.top/2017/04/24/springboot0/
+【2】http://blog.geekidentity.com/spring/spring_boot_translation/
+https://github.com/DocsHome/springboot/blob/master/pages/getting-started.md
