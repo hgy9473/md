@@ -128,6 +128,16 @@ task mkWebGradleDir(){
 * 依赖的传递性：如果 A 依赖 B , B 依赖 C ,那么 A 依赖 C
 
 * 依赖的阶段：compile、runtime、testCompile、testRuntime
+```c
+compile 
+	用来编译项目源代码的依赖
+runtime
+	在运行时被生成的类使用的依赖。 默认的, 也包含了compile时的依赖。
+testCompile
+	编译测试代码的依赖。 默认的, 包含runtime时的依赖和compile时的依赖。
+testRuntime
+	运行测试所需要的依赖。 默认的, 包含上面三个依赖。
+```
 
 * 依赖配置
 
@@ -149,6 +159,18 @@ dependencies {
 // group:"",name:"",version:""
 
 ```
+
+## 依赖本地 jar 包
+
+Gradle也可以从本地目录中引入JAR包依赖，可以单一引入指定的某一JAR包，也可以引入某目录下所有的JAR包
+
+```groovy
+dependencies {
+	compile files('dir/file.jar')
+	compile fileTree(dir: 'libs', include: '*.jar')
+}
+```
+
 
 ## 处理依赖冲突
 
