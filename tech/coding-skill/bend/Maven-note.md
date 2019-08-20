@@ -11,6 +11,7 @@ Maven 基于项目对象模型（POM）,通过一小段描述信息来管理项�
 ### 系统环境变量配置
 
 M2_HOME .../apache-maven-3.5.4
+
 Path ...;%M2_HOME%\bin
 
 检验：在命令行窗口输入 `mvn -v`。 正常情况应当显示 Maven 版本、Java　版本和操作系统版本。
