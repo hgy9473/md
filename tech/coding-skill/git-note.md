@@ -258,6 +258,7 @@ $ git branch
 $ git branch -r
 
 // 推送本地的 dev 分支到远程的 dev 分支（如果远程库没有会自动创建）
+// git push origin 远程分支名x:本地分支名x
 $ git push origin dev:dev
 
 // 合并指定分支到当前分支
