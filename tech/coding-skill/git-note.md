@@ -122,6 +122,21 @@ $ git reflog // 查看所有操作记录（包括已经删除的commit和reset�
 
 ```
 
+
+### Git 的整体架构
+
+![git 的整体架构](../images/git-pull-fetch.jpg)
+
+- 工作区（working directory）：本地工作目录
+
+- 暂存区（stage area, 又称为索引区）：用于标记将要提交的内容。
+
+- 本地仓库（local repository）
+
+- 远程仓库（remote repository）
+
+- 远程仓库副本：可以理解为存在于本地的远程仓库缓存。使用fetch 获取时，并未合并到本地仓库，此时可使用 git merge 实现远程仓库副本与本地仓库的合并。 
+
 ### 版本回退
 
 ```c
@@ -356,6 +371,11 @@ $ git push -u origin master
 
 
 ## 参考资料
+
 1. [Git 教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+
 2. [图解 Git](https://marklodato.github.io/visual-git-guide/index-zh-cn.html)
+
 3. [Git Cheat Sheet](https://www.git-tower.com/blog/git-cheat-sheet/)
+
+4. [谈谈版本管理Git之理论与架构](https://zhuanlan.zhihu.com/p/59591617)
