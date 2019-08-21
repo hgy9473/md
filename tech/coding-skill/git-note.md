@@ -215,10 +215,24 @@ $ git remote rm origin
 $ git remote -v
 
 // 取回远程仓库分支的内容(与当前分支合并)
+// git pull <远程主机名> <远程分支名>:<本地分支名>
 $ git pull origin master
 
 // 推送本地仓库master分支的更新到远程仓库
 $ git push origin master
+
+/*********************************** 
+ * 使用 git fetch 合并分支
+ *
+ */
+git fetch origin master:tmp 
+//在本地新建一个temp分支，并将远程origin仓库的master分支代码下载到本地temp分支
+git diff tmp 
+//来比较本地代码与刚刚从远程下载下来的代码的区别
+git merge tmp
+//合并temp分支到本地的master分支
+git branch -d temp
+//如果不想保留temp分支 可以用这步删除
 
 ```
 
