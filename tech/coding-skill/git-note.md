@@ -150,6 +150,9 @@ $ git reset --hard HEAD~N
 // 恢复到指定版本（过去和未来版本都行）
 $ git reset --hard <commit ID> // 每一个commit都有唯一的id
 
+// 撤回暂存区中的文件
+$ git reset HEAD <filename>
+
 ```
 
 ### 撤销修改
