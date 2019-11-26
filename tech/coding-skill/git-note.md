@@ -153,6 +153,13 @@ $ git reset --hard <commit ID> // 每一个commit都有唯一的id
 // 撤回暂存区中的文件
 $ git reset HEAD <filename>
 
+// 撤销上一次commit，如 commit 后发现注释错了
+$ git reset HEAD~
+/*
+这个操作不会让工作区（你磁盘上文件的状态）发生改变。执行这个操作后需要重新 add 才能提交
+
+
+
 ```
 
 ### 撤销修改
