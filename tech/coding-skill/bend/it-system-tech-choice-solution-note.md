@@ -78,6 +78,7 @@
     - 轮播: `Bootstrap`
     - 弹窗:  `Bootstrap` / `Layui`
     - 下拉搜索: `selectivity`
+    - 图片浏览器: `jquery-viewer`
 
   - 图表: `Echarts` / `HighCharts`
 
