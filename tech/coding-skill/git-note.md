@@ -113,6 +113,7 @@ $ git status
  4. nothing to commit, working tree clean: 没有文件被修改。此时暂存区是空的，工作区和文件和分支当前版本一样。
 
 
+
 */
 
 // 查看版本提交日志
@@ -137,6 +138,37 @@ $ git reflog // 查看所有操作记录（包括已经删除的commit和reset�
 
 - 远程仓库副本：可以理解为存在于本地的远程仓库缓存。使用fetch 获取时，并未合并到本地仓库，此时可使用 git merge 实现远程仓库副本与本地仓库的合并。 
 
+### 查看版本提交日志
+
+```c
+
+$ git log // 查看全部版本历史
+
+$ git log --oneline  // 查看日志，每条记录显示一行
+
+$ git log -n5 // 查看最近 5 条记录
+
+$ git log --oneline -5
+$ git log --oneline -n5 // 查看最近 5 条，每条一行
+
+$ git log --graph // 以图形化的方式显示版本演变历史
+
+$ git log master --oneline // 显示master分支的版本历史，每条一行
+
+$ git log --stat // 在git log 的基础上输出文件增删改的统计数据
+
+$ git log -p // 输出每个commit具体修改的内容，输出的形式以diff的形式给出
+
+$ git shortlog // 输出汇总信息，以作者进行分类
+
+$ git shortlog -s // 统计每个作者的 commit 数量
+
+$ git shortlog -s -n // 统计每个作者的 commit 数量，并且按照倒序排列
+
+$ git reflog // 查看所有操作记录（包括已经删除的commit和reset操作）git log则是看不出来被删除的commitid
+
+```
+
 ### 版本回退
 
 ```c
@@ -157,8 +189,6 @@ $ git reset HEAD <filename>
 $ git reset HEAD~
 /*
 这个操作不会让工作区（你磁盘上文件的状态）发生改变。执行这个操作后需要重新 add 才能提交
-
-
 
 ```
 
