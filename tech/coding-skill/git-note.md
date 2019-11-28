@@ -169,6 +169,43 @@ $ git reflog // 查看所有操作记录（包括已经删除的commit和reset�
 
 ```
 
+### 理解HEAD
+
+```c
+// HEAD 指的是当前活跃分支的游标，HEAD 永远只想当前工作的分支。
+
+// 可以用 checkout 命令改变 HEAD 的指向位置。
+
+// 创建分支的本质是从 HEAD 指向的 commit 创建分支。
+
+// HEAD 指向一个分支，分支指向一个 commit。切换分支就是改变 HEAD 的指向。
+
+// 当HEAD没有指向某个分支，而是指向一个commit，则会形成detached HEAD。
+
+/* 
+
+ detached HEAD 产生原因：
+
+(1). 使用git checkout指令切换到指定commit提交。
+
+(2). 使用git checkout指令切换到远程分支。
+
+(3). Rebase操作也会产生detached HEAD状态。
+
+在detached HEAD状态提交的commit与普通分支提交commit相比，当切换到其他分支后不容易被找到。
+
+(1). 要么记住提交的sha-1值。
+
+(2). 或者通过git reflog查找。
+
+(3). 如果提交长期没有被再次使用，就会被资源回收机制收回。
+
+如果想要保留这个提交，可以在此提交的基础上创建一个分支
+
+*/
+
+```
+
 ### 版本回退
 
 ```c
@@ -434,3 +471,5 @@ $ git push -u origin master
 3. [Git Cheat Sheet](https://www.git-tower.com/blog/git-cheat-sheet/)
 
 4. [谈谈版本管理Git之理论与架构](https://zhuanlan.zhihu.com/p/59591617)
+
+4. [蚂蚁部落Git教程](http://www.softwhy.com/article-8478-1.html)
