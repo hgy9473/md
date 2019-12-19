@@ -291,6 +291,9 @@ $ git remote rm origin
 // 查看远程仓库信息
 $ git remote -v
 
+// 查看未推送的提交：假设当前分支为 master
+$ git log origin/master..HEAD
+
 // 取回远程仓库分支的内容(与当前分支合并)
 // git pull <远程主机名> <远程分支名>:<本地分支名>
 $ git pull origin master
