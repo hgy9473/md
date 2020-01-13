@@ -104,5 +104,7 @@ graph TB;
 
 ## 参考资料
 【1】 超图倾斜摄影解决方案（技术白皮书）
-【2】浅谈几个倾斜摄影三维模型的修补软件 . https://www.cnblogs.com/Wish3D/p/6404389.html
-【3】基于Smart3D的低空无人机倾斜摄影实景三维建模研究 . https://mp.weixin.qq.com/s/hEp5d2Pak3WzODoN0250UQ
+
+【2】 浅谈几个倾斜摄影三维模型的修补软件 . https://www.cnblogs.com/Wish3D/p/6404389.html
+
+【3】 基于Smart3D的低空无人机倾斜摄影实景三维建模研究 . https://mp.weixin.qq.com/s/hEp5d2Pak3WzODoN0250UQ
