@@ -1,8 +1,6 @@
-# markdown 杂记
+# 学习笔记
 
-主要记录一些笔记
-
-## 前端笔记
+## 前端
 
 * [使用 Google Chrome 查看网站性能](./tech/coding-skill/chrome-check-web-resource-load-performance.md)
 
@@ -17,7 +15,7 @@
 * [Ajax JS库笔记](./tech/coding-skill/fend/ajax-lib-note.md)
 
 
-## 后端笔记
+## 后端
 
 * [Gradle 学习笔记](./tech/coding-skill/bend/gradle-note.md)
 
