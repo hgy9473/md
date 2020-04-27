@@ -118,8 +118,15 @@ $ git status
 
 // 查看版本提交日志
 $ git log
-$ git log --pretty=oneline  // 简化查看日志
+$ git log --oneline  // 简化查看日志
 $ git reflog // 查看所有操作记录（包括已经删除的commit和reset操作）git log则是看不出来被删除的commitid
+
+$ git log --name-status 每次修改的文件列表, 显示状态
+$ git log --name-only 每次修改的文件列表
+$ git log --stat 每次修改的文件列表, 及文件修改的统计
+$ git whatchanged 每次修改的文件列表
+$ git whatchanged --stat 每次修改的文件列表, 及文件修改的统计
+$ git show 显示最后一次的文件改变的具体内容
 
 ```
 
