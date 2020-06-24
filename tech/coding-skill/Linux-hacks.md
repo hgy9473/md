@@ -170,3 +170,107 @@ grep -rl  a ./
 
 ### 在 grep 中使用正则表达式
 
+```c
+// ^ 匹配行首
+# grep "^c" a
+cat 
+computer
+
+// $ 匹配行尾
+# grep "e$" a
+applce
+juice
+orange
+
+
+// ^$ 匹配空行
+// 统计空行数量
+# grep -c  "^$" a
+10
+
+// . 匹配一个字符
+// * 匹配零个或者多个前一个字符
+// 
+
+```
+
+### find 命令
+
+> find 常常用于查找文件
+> 语法：find [pathnames] [conditions]
+
+```c
+// 查找 /etc 路径下 名字带有 mail 的文件
+# find /etc -name "*mail*"
+
+// 查找当前目录下 60 天以前修改的文件
+# find . -mtime +60
+
+// 查找系统中大小超过 100M 的文件
+# find / -type f -size +100M
+
+```
+
+### 控制标准输出和错误信息输出
+```c
+# cat file.txt > /dev/null
+
+
+# cat invalid-file-name.txt 2> /dev/null
+
+```
+
+### join 指令
+```c
+$ cat employee.txt
+100 Jason Smith
+200 John Doe
+300 Sanjay Gupta
+400 Ashok Sharma
+
+
+$ cat bonus.txt
+100 $5,000
+200 $500
+300 $3,000
+400 $1,250
+
+
+$ join employee.txt bonus.txt
+100 Jason Smith $5,000
+200 John Doe $500
+300 Sanjay Gupta $3,000
+400 Ashok Sharma $1,250
+
+```
+
+### 转换大小写
+
+```c
+$ cat employee.txt
+100 Jason Smith
+200 John Doe
+300 Sanjay Gupta
+400 Ashok Sharma
+
+$ tr a-z A-Z < employee.txt
+100 JASON SMITH
+200 JOHN DOE
+300 SANJAY GUPTA
+400 ASHOK SHARMA
+
+$ cat department.txt
+100 FINANCE
+200 MARKETING
+300 PRODUCT DEVELOPMENT
+400 SALES
+
+$ tr A-Z a-z < department.txt
+100 finance
+200 marketing
+300 product development
+400 sales
+```
+
+### xargs 命令
+
