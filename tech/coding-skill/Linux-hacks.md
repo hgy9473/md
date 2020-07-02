@@ -274,3 +274,31 @@ $ tr A-Z a-z < department.txt
 
 ### xargs 命令
 
+```c
+// 列出查找的文件的详情
+find /etc -name "*loc*.conf" | xargs ls -lh
+lrwxrwxrwx. 1 root root   46 May 11  2019 /etc/fonts/conf.d/51-local.conf -> /usr/share/fontconfig/conf.avail/51-local.conf
+-rw-r--r--. 1 root root   17 Feb 18 10:43 /etc/locale.conf
+-rw-r--r--. 1 root root 2.3K Jan  4 02:38 /etc/lvm/lvmlocal.conf
+
+```
+
+### sort
+```c
+// employee_name:employee_id:department_name.
+$ cat names.txt
+Emma Thomas:100:Marketing
+Alex Jason:200:Sales
+Madison Randy:300:Product Development
+Sanjay Gupta:400:Support
+Nisha Singh:500:Sales
+
+// 按照id排序
+$ sort -t: -k 2 names.txt
+Emma Thomas:100:Marketing
+Alex Jason:200:Sales
+Madison Randy:300:Product Development
+Sanjay Gupta:400:Support
+Nisha Singh:500:Sales
+
+```
